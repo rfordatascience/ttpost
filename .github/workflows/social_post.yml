@@ -42,7 +42,7 @@ jobs:
         run: Rscript -e 'renv::restore()'
       - name: Create and post tweet
         run: |
-          rtweet::rtweet_bot(
+          token <- rtweet::rtweet_bot(
             api_key = Sys.getenv("TTBOT_API_KEY"),
             api_secret = Sys.getenv("TTBOT_API_SECRET"),
             access_token = Sys.getenv("TTBOT_ACCESS_TOKEN"),
@@ -52,6 +52,7 @@ jobs:
           rtweet::post_tweet(
             status = glue::glue(
               "This is another test tweet, sent at {tweet_start_ts}."
-            )
+            ),
+            token = token
           )
         shell: Rscript {0}
