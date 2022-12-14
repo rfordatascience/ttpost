@@ -38,6 +38,8 @@ jobs:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
+      - name: Restore packages
+        run: Rscript -e 'renv::restore()'
       - name: Create and post tweet
         run: |
           rtweet::rtweet_bot(
