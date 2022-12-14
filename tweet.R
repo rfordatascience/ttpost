@@ -4,4 +4,9 @@ rtweet::rtweet_bot(
   access_token = Sys.getenv("TTBOT_ACCESS_TOKEN"),
   access_secret = Sys.getenv("TTBOT_ACCESS_TOKEN_SECRET")
 )
-rtweet::post_tweet(status = "This is another test tweet, sent using GHA!")
+tweet_start_ts <- Sys.time()
+rtweet::post_tweet(
+  status = glue::glue(
+    "This is another test tweet, sent at {tweet_start_ts}."
+  )
+)
