@@ -38,4 +38,17 @@ jobs:
           key: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{ inputs.cache-version }}-${{ hashFiles('renv.lock') }}
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
       - name: Create and post tweet
-        run: Rscript tweet.R
+        run: |
+          rtweet::rtweet_bot(
+            api_key = Sys.getenv("TTBOT_API_KEY"),
+            api_secret = Sys.getenv("TTBOT_API_SECRET"),
+            access_token = Sys.getenv("TTBOT_ACCESS_TOKEN"),
+            access_secret = Sys.getenv("TTBOT_ACCESS_TOKEN_SECRET")
+          )
+          tweet_start_ts <- Sys.time()
+          rtweet::post_tweet(
+            status = glue::glue(
+              "This is another test tweet, sent at {tweet_start_ts}."
+            )
+          )
+        shell: Rscript {0}
