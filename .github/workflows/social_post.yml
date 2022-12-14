@@ -12,6 +12,7 @@ jobs:
       TTBOT_API_SECRET: ${{ secrets.TTBOT_API_SECRET }}
       TTBOT_ACCESS_TOKEN: ${{ secrets.TTBOT_ACCESS_TOKEN }}
       TTBOT_ACCESS_TOKEN_SECRET: ${{ secrets.TTBOT_ACCESS_TOKEN_SECRET }}
+      GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v3
       - uses: r-lib/actions/setup-r@v2
