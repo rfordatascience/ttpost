@@ -132,6 +132,18 @@
         "rlang"
       ]
     },
+    "emoji": {
+      "Package": "emoji",
+      "Version": "15.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "961ccf8e88d1a8add09f9c811f4d7e29",
+      "Requirements": [
+        "glue",
+        "stringr",
+        "tibble"
+      ]
+    },
     "fansi": {
       "Package": "fansi",
       "Version": "1.0.3",
