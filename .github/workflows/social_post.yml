@@ -1,6 +1,8 @@
 name: social-post
 
 on:
+  schedule:
+    - cron: '0 15 * * 2'
   workflow_dispatch:
 
 
