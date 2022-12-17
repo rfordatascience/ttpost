@@ -80,3 +80,7 @@ if (length(post_vars)) {
 # Tweet.
 source("helpers-twitter.R")
 tt_tweet(status_msg, img_paths, alt_text)
+
+# Toot.
+source("helpers-mastodon.R")
+tt_toot(status_msg, img_paths, alt_text)
