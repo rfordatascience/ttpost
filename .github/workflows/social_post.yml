@@ -43,5 +43,5 @@ jobs:
           restore-keys: ${{ steps.get-version.outputs.os-version }}-${{ steps.get-version.outputs.r-version }}-${{inputs.cache-version }}-
       - name: Restore packages
         run: Rscript -e 'renv::restore()'
-      - name: Create and post tweet
-        run: Rscript tweet.R
+      - name: Post to social media.
+        run: Rscript runner.R
