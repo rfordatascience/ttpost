@@ -1,4 +1,4 @@
-name: social-post
+name: social
 
 on:
   schedule:
@@ -7,7 +7,7 @@ on:
 
 
 jobs:
-  tweet:
+  post:
     runs-on: windows-latest
     env:
       TTBOT_API_KEY: ${{ secrets.TTBOT_API_KEY }}
