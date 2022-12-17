@@ -122,6 +122,25 @@
         "rprojroot"
       ]
     },
+    "dplyr": {
+      "Package": "dplyr",
+      "Version": "1.0.10",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "539412282059f7f0c07295723d23f987",
+      "Requirements": [
+        "R6",
+        "generics",
+        "glue",
+        "lifecycle",
+        "magrittr",
+        "pillar",
+        "rlang",
+        "tibble",
+        "tidyselect",
+        "vctrs"
+      ]
+    },
     "ellipsis": {
       "Package": "ellipsis",
       "Version": "0.3.2",
@@ -442,6 +461,21 @@
       "Repository": "CRAN",
       "Hash": "690bd2acc42a9166ce34845884459320",
       "Requirements": []
+    },
+    "rtoot": {
+      "Package": "rtoot",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "7f3a60394a4fa1cfb2f5d1573ac317d9",
+      "Requirements": [
+        "clipr",
+        "curl",
+        "dplyr",
+        "httr",
+        "jsonlite",
+        "tibble"
+      ]
     },
     "rtweet": {
       "Package": "rtweet",
