@@ -57,9 +57,9 @@ alt_text <- c(
 
 if (length(post_vars)) {
   status_msg <- glue::glue(
-    "The @R4DScommunity welcomes you to week {week_num} of #TidyTuesday!",
+    "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
     " We're exploring {data_title}!\n\n", 
-    emoji::emoji("folder"), " http://bit.ly/tidyreadme\n", 
+    emoji::emoji("folder"), " https://bit.ly/tidyreadme\n", 
     emoji::emoji("news"), " {post_vars$article_link}\n", 
     "\n#r4ds #tidyverse #RStats #DataViz",
   )
@@ -70,7 +70,7 @@ if (length(post_vars)) {
   )
 } else {
   status_msg <- glue::glue(
-    "The @R4DScommunity welcomes you to week {week_num} of #TidyTuesday!",
+    "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
     " We're exploring {data_title}!\n\n", 
     emoji::emoji("folder"), " http://bit.ly/tidyreadme\n", 
     "\n#r4ds #tidyverse #RStats #DataViz",
@@ -84,3 +84,7 @@ tt_tweet(status_msg, img_paths, alt_text)
 # Toot.
 source("helpers-mastodon.R")
 tt_toot(status_msg, img_paths, alt_text)
+
+# LinkedIn.
+source("helpers-linkedin.R")
+tt_linkedin(status_msg, alt_text)
