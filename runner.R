@@ -81,7 +81,9 @@ if (week_num == 1) {
       status_msg, 
       "\n{emoji::emoji('news')} {post_vars$article_link}"
     )
-    if (nchar(long_msg) + nchar(status_msg_end) <= 240) {
+    # Subtract 16 because twitter doesn't count the https:// and everything else
+    # allows for longer messages. And we have 2 of those now.
+    if (nchar(long_msg) - 16 + nchar(status_msg_end) <= 280) {
       status_msg <- long_msg
     }
     alt_text <- c(
