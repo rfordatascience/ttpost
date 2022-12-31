@@ -10,7 +10,7 @@ if (week_num == 1) {
   status_msg <- glue::glue(
     "It's week 1 of {week_year}, which means it's Bring Your Own Data Week!\n",
     "Ideas:",
-    "{emoji::emoji('rewind')} A previous #TidyTuesday dataset (see bit.ly/tidyreadme)",
+    "{emoji::emoji('rewind')} A previous #TidyTuesday dataset (https://tidytues.day/{week_year - 1})",
     "{emoji::emoji('index pointing at the viewer')} Personal metadata (TV shows watched, music listened, #RStats written, etc)",
     "{emoji::emoji('question')} Whatever else you want to use!",
     "\n#r4ds #tidyverse #DataViz",
@@ -72,7 +72,7 @@ if (week_num == 1) {
   status_msg <- glue::glue(
     "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
     " We're exploring {data_title}!\n\n", 
-    "{emoji::emoji('folder')} https://bit.ly/tidyreadme" 
+    "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
   status_msg_end <- "\n\n#r4ds #tidyverse #RStats #DataViz"
   
