@@ -1,5 +1,9 @@
-tt_linkedin <- function(status_msg, alt_text) {
+tt_linkedin <- function(status_msg) {
   # At least for now, we use the same image for every TT post on LinkedIn.
+  alt_text <- paste(
+    "Logo for the #TidyTuesday Project, it's the words TidyTuesday overlaying",
+    "a black paint splash"    
+  )
   
   li_base <- httr2::request("https://api.linkedin.com/v2") |> 
     httr2::req_auth_bearer_token(Sys.getenv("LINKEDIN_TOKEN")) |> 
@@ -47,7 +51,7 @@ tt_linkedin <- function(status_msg, alt_text) {
         content = list(
           media = list(
             id = "urn:li:image:C5622AQET2DqAfePIaw",
-            altText = alt_text[[1]]
+            altText = alt_text
           )
         ),
         lifecycleState = "PUBLISHED",
