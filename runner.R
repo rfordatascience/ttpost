@@ -69,27 +69,28 @@ if (week_num == 1) {
     )
   )
   
+  status_msg <- glue::glue(
+    "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
+    " We're exploring {data_title}!\n\n", 
+    "{emoji::emoji('folder')} https://bit.ly/tidyreadme" 
+  )
+  status_msg_end <- "\n\n#r4ds #tidyverse #RStats #DataViz"
+  
   if (length(post_vars)) {
-    status_msg <- glue::glue(
-      "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
-      " We're exploring {data_title}!\n\n", 
-      emoji::emoji("folder"), " https://bit.ly/tidyreadme\n", 
-      emoji::emoji("news"), " {post_vars$article_link}\n", 
-      "\n#r4ds #tidyverse #RStats #DataViz",
+    long_msg <- glue::glue(
+      status_msg, 
+      "\n{emoji::emoji('news')} {post_vars$article_link}"
     )
+    if (nchar(long_msg) + nchar(status_msg_end) <= 240) {
+      status_msg <- long_msg
+    }
     alt_text <- c(
       alt_text,
       post_vars$pic1_alt,
       post_vars$pic2_alt
     )
-  } else {
-    status_msg <- glue::glue(
-      "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
-      " We're exploring {data_title}!\n\n", 
-      emoji::emoji("folder"), " http://bit.ly/tidyreadme\n", 
-      "\n#r4ds #tidyverse #RStats #DataViz",
-    )
   }
+  status_msg <- glue::glue(status_msg, status_msg_end)
 }
 
 # Tweet.
