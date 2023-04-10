@@ -95,10 +95,6 @@ if (week_num == 1) {
   status_msg <- glue::glue(status_msg, status_msg_end)
 }
 
-# Tweet.
-source("helpers-twitter.R")
-tt_tweet(status_msg, img_paths, alt_text)
-
 # Toot.
 source("helpers-mastodon.R")
 tt_toot(status_msg, img_paths, alt_text)
@@ -106,3 +102,7 @@ tt_toot(status_msg, img_paths, alt_text)
 # LinkedIn.
 source("helpers-linkedin.R")
 tt_linkedin(status_msg)
+
+# Tweet.
+source("helpers-twitter.R")
+tt_tweet(status_msg, img_paths, alt_text)
