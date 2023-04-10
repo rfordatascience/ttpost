@@ -2,7 +2,7 @@ name: social
 
 on:
   schedule:
-    - cron: '30 13 * * 1'
+    - cron: '12 13 * * 1'
   workflow_dispatch:
 
 
