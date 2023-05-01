@@ -104,10 +104,10 @@ tt_toot(status_msg, img_paths, alt_text)
 source("helpers-linkedin.R")
 tt_linkedin(status_msg)
 
-# Tweet.
-source("helpers-twitter.R")
-tt_tweet(status_msg, img_paths, alt_text)
-
 # Slack.
 source("helpers-slack.R")
 tt_slack(status_msg, status_msg_end, img_paths, alt_text)
+
+# Tweet.
+source("helpers-twitter.R")
+tt_tweet(status_msg, img_paths, alt_text)

@@ -15,7 +15,10 @@ jobs:
       TTBOT_ACCESS_TOKEN: ${{ secrets.TTBOT_ACCESS_TOKEN }}
       TTBOT_ACCESS_TOKEN_SECRET: ${{ secrets.TTBOT_ACCESS_TOKEN_SECRET }}
       RTOOT_DEFAULT_TOKEN: ${{ secrets.RTOOT_TOKEN }}
-      LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN}}
+      LI_CLIENT_ID: ${{ secrets.LI_CLIENT_ID}}
+      LI_CLIENT_SECRET: ${{ secrets.LI_CLIENT_SECRET}}
+      LI_REFRESH_TOKEN: ${{ secrets.LI_REFRESH_TOKEN}}
+      SLACK_API_TOKEN: ${{ secrets.SLACK_API_TOKEN}}
       GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v3
