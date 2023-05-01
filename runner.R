@@ -74,7 +74,7 @@ if (week_num == 1) {
     " We're exploring {data_title}!\n\n", 
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
-  status_msg_end <- "\n\n#r4ds #tidyverse #RStats #DataViz"
+  status_msg_end <- "\n\n#RStats #DataViz #PyData #tidyverse"
   
   if (length(post_vars)) {
     long_msg <- glue::glue(
@@ -92,6 +92,7 @@ if (week_num == 1) {
       post_vars$pic2_alt
     )
   }
+  
   status_msg <- glue::glue(status_msg, status_msg_end)
 }
 
