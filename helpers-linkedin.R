@@ -4,12 +4,7 @@ tt_linkedin <- function(status_msg) {
     "Logo for the #TidyTuesday Project, it's the words TidyTuesday overlaying",
     "a black paint splash"    
   )
-  
-  li_base <- httr2::request("https://api.linkedin.com/v2") |> 
-    httr2::req_auth_bearer_token(Sys.getenv("LINKEDIN_TOKEN")) |> 
-    httr2::req_headers(
-      `X-Restli-Protocol-Version` = "2.0.0"
-    )
+
   author <- "urn:li:person:mBbHaQfQtg"
 
   # The new LinkedIn API uses markdown, so escape _ so it isn't confused.
@@ -34,6 +29,24 @@ tt_linkedin <- function(status_msg) {
       "⬡ The event is organized by the R4DS Online Learning Community.",
       "⬡ For the latest datasets, follow R4DS on Twitter, Mastodon, LinkedIn, or Posit Community https://community.rstudio.com/c/tidytuesday/65",
       sep = "\n"
+    )
+  
+  li_client <- httr2::oauth_client(
+    id = Sys.getenv("LI_CLIENT_ID"),
+    token_url = "https://www.linkedin.com/oauth/v2/accessToken",
+    secret = Sys.getenv("LI_CLIENT_SECRET"),
+    auth = "header"
+  )
+  
+  updated_token <- httr2::oauth_flow_refresh(
+    li_client,
+    refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
+  )
+  
+  li_base <- httr2::request("https://api.linkedin.com/v2") |> 
+    httr2::req_auth_bearer_token(updated_token$access_token) |>
+    httr2::req_headers(
+      `X-Restli-Protocol-Version` = "2.0.0"
     )
   
   posted <- li_base |> 
