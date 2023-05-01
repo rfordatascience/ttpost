@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.2.2",
+    "Version": "4.2.3",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -541,6 +541,21 @@
       "Requirements": [
         "R6",
         "stringr"
+      ]
+    },
+    "slackcalls": {
+      "Package": "slackcalls",
+      "Version": "0.0.7",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "yonicd",
+      "RemoteRepo": "slackcalls",
+      "RemoteRef": "master",
+      "RemoteSha": "f8fa05e4b92f3deea0b298ee09bcd2ebb2ae880a",
+      "Hash": "4d5cb238c1f4f509fcdaadc57c1fe5a2",
+      "Requirements": [
+        "httr"
       ]
     },
     "stringi": {
