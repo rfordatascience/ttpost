@@ -43,21 +43,13 @@ tt_linkedin <- function(status_msg) {
     refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
   )
   
-  expiration <- lubridate::as_datetime(
-    updated_token$expires_at, tz = "America/Chicago"
-  )
-  
-  cli::cli_alert_info(
-    glue::glue("Token expires at {expiration}.")
-  )
-  
   li_base <- httr2::request("https://api.linkedin.com/v2") |> 
     httr2::req_auth_bearer_token(updated_token$access_token) |>
     httr2::req_headers(
       `X-Restli-Protocol-Version` = "2.0.0"
     )
   
-  posted <- li_base |> 
+  li_post <- li_base |> 
     httr2::req_url_path_append("posts") |> 
     httr2::req_body_json(
       list(
@@ -78,7 +70,18 @@ tt_linkedin <- function(status_msg) {
         lifecycleState = "PUBLISHED",
         isReshareDisabledByAuthor = FALSE
       )
-    ) |> 
+    )
+  
+  post_test <- li_post |> 
+    httr2::req_dry_run()
+  
+  check <- substr(post_test$headers$authorization, 1, 10)
+  
+  cli::cli_alert_info(
+    check
+  )
+  
+  posted <- li_post |> 
     httr2::req_perform()
   
   if (httr2::resp_status(posted) != 201) {
