@@ -95,15 +95,3 @@ if (week_num == 1) {
   
   status_msg <- glue::glue(status_msg, status_msg_end)
 }
-
-# Toot.
-source("helpers-mastodon.R")
-tt_toot(status_msg, img_paths, alt_text)
-
-# Slack.
-source("helpers-slack.R")
-tt_slack(status_msg, status_msg_end, img_paths, alt_text)
-
-# Tweet.
-source("helpers-twitter.R")
-tt_tweet(status_msg, img_paths, alt_text)

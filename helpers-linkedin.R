@@ -43,6 +43,14 @@ tt_linkedin <- function(status_msg) {
     refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
   )
   
+  expiration <- lubridate::as_datetime(
+    updated_token$expires_at, tz = "America/Chicago"
+  )
+  
+  cli::cli_alert_info(
+    glue::glue("Token expires at {expiration}.")
+  )
+  
   li_base <- httr2::request("https://api.linkedin.com/v2") |> 
     httr2::req_auth_bearer_token(updated_token$access_token) |>
     httr2::req_headers(
