@@ -8,7 +8,7 @@ on:
 
 jobs:
   post:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     env:
       LI_CLIENT_ID: ${{ secrets.LI_CLIENT_ID}}
       LI_CLIENT_SECRET: ${{ secrets.LI_CLIENT_SECRET}}
