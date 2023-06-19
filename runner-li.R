@@ -45,13 +45,17 @@ li_client <- httr2::oauth_client(
   auth = "header"
 )
 
-updated_token <- httr2::oauth_flow_refresh(
-  li_client,
-  refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
-)
+# updated_token <- httr2::oauth_flow_refresh(
+#   li_client,
+#   refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
+# )
 
 li_base <- httr2::request("https://api.linkedin.com/v2") |> 
-  httr2::req_auth_bearer_token(updated_token$access_token) |>
+  httr2::req_oauth_refresh(
+    client = li_client,
+    refresh_token = Sys.getenv("LI_REFRESH_TOKEN"),
+    scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_organization_social,w_member_social,w_organization_social"
+  ) |> 
   httr2::req_headers(
     `X-Restli-Protocol-Version` = "2.0.0"
   )
