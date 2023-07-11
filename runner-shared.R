@@ -61,8 +61,8 @@ if (week_num == 1) {
       "NOT about criticizing or tearing down your fellow #RStats practitioners",
       "or their code! Be supportive and kind to each other! Like other's posts",
       "and help promote the #RStats community!\nUse the hashtag #TidyTuesday on",
-      "Twitter if you create your own version and would like to share",
-      "it.\nInclude a picture of the visualisation.\nInclude a copy of the code",
+      "social media if you create your own version and would like to share",
+      "it.\nInclude a picture of the visualization.\nInclude a copy of the code",
       "used to create your visualization.\nFocus on improving your craft, even",
       "if you end up with something simple!\nGive credit to the original data",
       "source whenever possible."    
@@ -74,15 +74,14 @@ if (week_num == 1) {
     " We're exploring {data_title}!\n\n", 
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
-  status_msg_end <- "\n\n#RStats #DataViz #PyData #tidyverse"
+  status_msg_end <- "\n\n#RStats #DataViz #PyData #tidyverse #r4ds"
   
   if (length(post_vars)) {
     long_msg <- glue::glue(
       status_msg, 
       "\n{emoji::emoji('news')} {post_vars$article_link}"
     )
-    # Subtract 16 because twitter doesn't count the https:// and everything else
-    # allows for longer messages. And we have 2 of those now.
+    # Subtract 16 for legacy reasons related to the old bird app.
     if (nchar(long_msg) - 16 + nchar(status_msg_end) <= 280) {
       status_msg <- long_msg
     }

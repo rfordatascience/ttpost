@@ -34,7 +34,7 @@ status_msg <- status_msg |>
     "\nNew to #TidyTuesday?",
     "Welcome to the weekly social data project in R. All are welcome!",
     "⬡ The event is organized by the R4DS Online Learning Community.",
-    "⬡ For the latest datasets, follow R4DS on Twitter, Mastodon, LinkedIn, or Posit Community https://community.rstudio.com/c/tidytuesday/65",
+    "⬡ For the latest datasets, follow R4DS on Mastodon or LinkedIn",
     sep = "\n"
   )
 
@@ -45,19 +45,21 @@ li_client <- httr2::oauth_client(
   auth = "header"
 )
 
-# updated_token <- httr2::oauth_flow_refresh(
-#   li_client,
-#   refresh_token = Sys.getenv("LI_REFRESH_TOKEN")
-# )
+updated_token <- httr2::oauth_flow_refresh(
+  li_client,
+  refresh_token = Sys.getenv("LI_REFRESH_TOKEN"),
+  scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_organization_social,w_member_social,w_organization_social"
+)
 
-li_base <- httr2::request("https://api.linkedin.com/v2") |> 
+li_base <- httr2::request("https://api.linkedin.com/rest") |> 
   httr2::req_oauth_refresh(
     client = li_client,
     refresh_token = Sys.getenv("LI_REFRESH_TOKEN"),
     scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_organization_social,w_member_social,w_organization_social"
   ) |> 
   httr2::req_headers(
-    `X-Restli-Protocol-Version` = "2.0.0"
+    # `X-Restli-Protocol-Version` = "2.0.0"
+    `Linkedin-Version` = "202306"
   )
 
 li_post <- li_base |> 
