@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.3.0",
+    "Version": "4.3.1",
     "Repositories": [
       {
         "Name": "CRAN",
@@ -608,28 +608,6 @@
         "tibble"
       ],
       "Hash": "06eb72de42a3f8fcb252badc58f92b2b"
-    },
-    "rtweet": {
-      "Package": "rtweet",
-      "Version": "1.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "bit64",
-        "curl",
-        "httr",
-        "httr2",
-        "jsonlite",
-        "lifecycle",
-        "methods",
-        "progress",
-        "rlang",
-        "tibble",
-        "utils",
-        "withr"
-      ],
-      "Hash": "4fcb096419eb5066d7684b488d8a9b42"
     },
     "rvest": {
       "Package": "rvest",
