@@ -48,24 +48,28 @@ if (week_num == 1) {
   post_vars <- read_post_vars()
   alt_text <- c(
     paste(
-      "Logo for the #TidyTuesday Project, it's the words TidyTuesday overlaying",
-      "a black paint splash"    
+      "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying a",
+      "black paint splash"    
     ),
     paste(
-      "The data set comes from the source article or the source that the article",
-      "credits. Be mindful that the data is what it is and Tidy Tuesday is",
-      "designed to help you practice data visualization and basic data wrangling",
-      "in R.\nThis is NOT about criticizing the original article or graph. Real",
-      "people made the graphs, collected or acquired the data! Focus on the",
-      "provided dataset, learning, and improving your techniques in R.\nThis is",
-      "NOT about criticizing or tearing down your fellow #RStats practitioners",
-      "or their code! Be supportive and kind to each other! Like other's posts",
-      "and help promote the #RStats community!\nUse the hashtag #TidyTuesday on",
-      "social media if you create your own version and would like to share",
-      "it.\nInclude a picture of the visualization.\nInclude a copy of the code",
-      "used to create your visualization.\nFocus on improving your craft, even",
-      "if you end up with something simple!\nGive credit to the original data",
-      "source whenever possible."    
+      "TidyTuesday is a weekly social data project. All are welcome to", 
+      "participate! Please remember to share the code used to generate your", 
+      "results!\nTidyTuesday is organized by the R4DS Online Learning", 
+      "Community. Join our Slack for free online help with R and other", 
+      "data-related topics, or to participate in a data-related book club!\n\n", 
+      "How to Participate\nData is posted to social media every Monday", 
+      "morning. Follow the instructions in the new post for how to download", 
+      "the data.\nExplore the data, watching out for interesting", 
+      "relationships. We would like to emphasize that you should not draw", 
+      "conclusions about causation in the data. There are various moderating", 
+      "variables that affect all data, many of which might not have been", 
+      "captured in these datasets. As such, our suggestion is to use the data", 
+      "provided to practice your data tidying and plotting techniques, and to", 
+      "consider for yourself what nuances might underlie these relationships.", 
+      "\nCreate a visualization, a model, a shiny app, or some other piece of", 
+      "data-science-related output, using R or another programming language.\n", 
+      "Share your output and the code used to generate it on social media with", 
+      "the #TidyTuesday hashtag."
     )
   )
   
@@ -81,8 +85,7 @@ if (week_num == 1) {
       status_msg, 
       "\n{emoji::emoji('news')} {post_vars$article_link}"
     )
-    # Subtract 16 for legacy reasons related to the old bird app.
-    if (nchar(long_msg) - 16 + nchar(status_msg_end) <= 280) {
+    if (nchar(long_msg) + nchar(status_msg_end) <= 500) {
       status_msg <- long_msg
     }
     alt_text <- c(
