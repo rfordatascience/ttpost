@@ -61,15 +61,10 @@ if (week_num == 1) {
       "morning. Follow the instructions in the new post for how to download", 
       "the data.\nExplore the data, watching out for interesting", 
       "relationships. We would like to emphasize that you should not draw", 
-      "conclusions about causation in the data. There are various moderating", 
-      "variables that affect all data, many of which might not have been", 
-      "captured in these datasets. As such, our suggestion is to use the data", 
-      "provided to practice your data tidying and plotting techniques, and to", 
-      "consider for yourself what nuances might underlie these relationships.", 
-      "\nCreate a visualization, a model, a shiny app, or some other piece of", 
-      "data-science-related output, using R or another programming language.\n", 
-      "Share your output and the code used to generate it on social media with", 
-      "the #TidyTuesday hashtag."
+      "conclusions about causation in the data.\nCreate a visualization, a", 
+      "model, a shiny app, or some other piece of data-science-related output,", 
+      "using R or another programming language.\nShare your output and the", 
+      "code used to generate it on social media with the #TidyTuesday hashtag."
     )
   )
   
