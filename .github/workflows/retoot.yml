@@ -1,4 +1,4 @@
-name: toot
+name: retoot
 
 on:
   schedule:
