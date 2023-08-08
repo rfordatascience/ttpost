@@ -62,7 +62,7 @@ get_r4ds_toots <- function() {
   return(
     rlang::set_names(
       r4ds_toots$id,
-      c("unpinned", )
+      c("unpinned", "pinned")
     )
   )
 }
