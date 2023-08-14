@@ -42,7 +42,9 @@ li_client <- httr2::oauth_client(
   id = Sys.getenv("LI_CLIENT_ID"),
   token_url = "https://www.linkedin.com/oauth/v2/accessToken",
   secret = Sys.getenv("LI_CLIENT_SECRET"),
-  auth = "header"
+  auth = "header",
+  # Force it to not use cache no matter what else it thinks I want.
+  name = paste(sample(letters, 10, replace = TRUE), collapse = "")
 )
 
 li_base <- httr2::request("https://api.linkedin.com/rest") |> 
