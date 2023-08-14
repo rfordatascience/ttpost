@@ -80,8 +80,19 @@ li_post <- li_base |>
     )
   )
 
-posted <- li_post |> 
-  httr2::req_perform()
+# posted <- li_post |> 
+#   httr2::req_perform()
+
+# Probably a bug in httr2? Need to debug this, but this works.
+posted <- rlang::try_fetch(
+  httr2::req_perform(li_post),
+  error = function(cnd) {
+    # It seems to work the second time always. I think this is a bug with how
+    # httr2 is refreshing things.
+    Sys.sleep(3)
+    httr2::req_perform(li_post)
+  }
+)
 
 if (httr2::resp_status(posted) != 201) {
   stop("LinkedIn broke!")
