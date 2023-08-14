@@ -42,9 +42,7 @@ li_client <- httr2::oauth_client(
   id = Sys.getenv("LI_CLIENT_ID"),
   token_url = "https://www.linkedin.com/oauth/v2/accessToken",
   secret = Sys.getenv("LI_CLIENT_SECRET"),
-  auth = "header",
-  # Force it to not use cache no matter what else it thinks I want.
-  name = paste(sample(letters, 10, replace = TRUE), collapse = "")
+  auth = "header"
 )
 
 li_base <- httr2::request("https://api.linkedin.com/rest") |> 
@@ -52,7 +50,7 @@ li_base <- httr2::request("https://api.linkedin.com/rest") |>
     client = li_client,
     refresh_token = Sys.getenv("LI_REFRESH_TOKEN"),
     scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_organization_social,w_member_social,w_organization_social"
-  ) |> 
+  ) |>
   httr2::req_headers(
     `Linkedin-Version` = "202306"
   )
@@ -80,19 +78,17 @@ li_post <- li_base |>
     )
   )
 
-# posted <- li_post |> 
-#   httr2::req_perform()
-
-# Probably a bug in httr2? Need to debug this, but this works.
-posted <- rlang::try_fetch(
-  httr2::req_perform(li_post),
-  error = function(cnd) {
-    # It seems to work the second time always. I think this is a bug with how
-    # httr2 is refreshing things.
-    Sys.sleep(3)
-    httr2::req_perform(li_post)
-  }
-)
+posted <- li_post |>
+  # Sometimes it fails the first time or three. Still trying to figure out
+  # *why*, but this seems to fix it.
+  httr2::req_retry(
+    # It fails for lack of auth. I think their server is catching up with the
+    # refresh usage, maybe?
+    is_transient = \(x) httr2::resp_status(x) == 401,
+    max_tries = 10,
+    backoff = ~ 3
+  ) |> 
+  httr2::req_perform()
 
 if (httr2::resp_status(posted) != 201) {
   stop("LinkedIn broke!")

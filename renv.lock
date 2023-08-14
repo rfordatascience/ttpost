@@ -322,15 +322,9 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "0.2.3.9000",
-      "Source": "GitHub",
-      "Remotes": "jeroen/curl",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "httr2",
-      "RemoteUsername": "r-lib",
-      "RemoteRef": "HEAD",
-      "RemoteSha": "10daf9f2faad31415ced75f1a0eea2ead96844d2",
+      "Version": "0.2.3",
+      "Source": "Repository",
+      "Repository": "CRAN",
       "Requirements": [
         "R",
         "R6",
@@ -343,7 +337,7 @@
         "rlang",
         "withr"
       ],
-      "Hash": "6fc6565f9cd29140e3c7be517dfdd815"
+      "Hash": "193bb297368afbbb42dc85784a46b36e"
     },
     "ini": {
       "Package": "ini",
