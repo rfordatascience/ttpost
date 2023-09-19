@@ -14,6 +14,7 @@ if (week_num == 1) {
     "{emoji::emoji('index pointing at the viewer')} Personal metadata (TV shows watched, music listened, #RStats written, etc)",
     "{emoji::emoji('question')} Whatever else you want to use!",
     "\n#r4ds #tidyverse #DataViz",
+    "\nPlease consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
     .sep = "\n"
   )
   img_paths <- NULL
@@ -73,7 +74,11 @@ if (week_num == 1) {
     " We're exploring {data_title}!\n\n", 
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
-  status_msg_end <- "\n\n#RStats #DataViz #PyData #tidyverse #r4ds"
+  status_msg_end <- paste(
+    "\n\n#RStats #DataViz #PyData #tidyverse #r4ds",
+    "Please consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
+    sep = "\n"
+  )
   
   if (length(post_vars)) {
     long_msg <- glue::glue(
