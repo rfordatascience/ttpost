@@ -47,7 +47,8 @@ get_r4ds_toots <- function() {
     id = "109243727882736782",
     hashtag = "#TidyTuesday",
     exclude_reblogs = TRUE,
-    limit = 3
+    # Get a bunch in case I go on a promotion spree.
+    limit = 10
   ) |> 
     dplyr::filter(
       stringr::str_starts(
