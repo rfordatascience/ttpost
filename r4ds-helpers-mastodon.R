@@ -73,7 +73,6 @@ set_toot_content <- function(tt_toot_jon) {
     "It's #TidyTuesday y'all! Show us what you made on our Slack at https://r4ds.io/join (find the #chat-tidytuesday channel)!",
     "RT @jonthegeek {tt_toot_jon$url}",
     "{tt_toot_jon$content}",
-    "Please consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
     .sep = "\n\n"
   )
   
@@ -81,8 +80,7 @@ set_toot_content <- function(tt_toot_jon) {
     toot_content <- glue::glue(
       "It's #TidyTuesday y'all! Show us what you made on our Slack at https://r4ds.io/join (find the #chat-tidytuesday channel)!",
       "RT @jonthegeek {tt_toot_jon$url}",
-      "#RStats #DataViz #PyData #tidyverse #r4ds",
-      "Please consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
+      "#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
       .sep = "\n\n"
     )
   }
