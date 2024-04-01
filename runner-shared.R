@@ -14,7 +14,6 @@ if (week_num == 1) {
     "{emoji::emoji('index pointing at the viewer')} Personal metadata (TV shows watched, music listened, #RStats written, etc)",
     "{emoji::emoji('question')} Whatever else you want to use!",
     "\n#r4ds #tidyverse #DataViz",
-    "\nPlease consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
     .sep = "\n"
   )
   img_paths <- NULL
@@ -55,7 +54,7 @@ if (week_num == 1) {
     paste(
       "TidyTuesday is a weekly social data project. All are welcome to", 
       "participate! Please remember to share the code used to generate your", 
-      "results!\nTidyTuesday is organized by the R4DS Online Learning", 
+      "results!\nTidyTuesday is organized by the Data Science Learning", 
       "Community. Join our Slack for free online help with R and other", 
       "data-related topics, or to participate in a data-related book club!\n\n", 
       "How to Participate\nData is posted to social media every Monday", 
@@ -70,13 +69,12 @@ if (week_num == 1) {
   )
   
   status_msg <- glue::glue(
-    "The @R4DSCommunity welcomes you to week {week_num} of #TidyTuesday!",
+    "https://DSLC.io welcomes you to week {week_num} of #TidyTuesday!",
     " We're exploring {data_title}!\n\n", 
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
   status_msg_end <- paste(
-    "\n\n#RStats #DataViz #PyData #tidyverse #r4ds",
-    "Please consider a tax-deductible donation at https://r4ds.io/donate to support our work!",
+    "\n\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
     sep = "\n"
   )
   

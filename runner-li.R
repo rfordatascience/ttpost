@@ -8,7 +8,7 @@ library(httpuv)
  
 # At least for now, we use the same image for every TT post on LinkedIn.
 alt_text <- paste(
-  "Logo for the #TidyTuesday Project, it's the words TidyTuesday overlaying",
+  "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying",
   "a black paint splash"    
 )
 
@@ -21,20 +21,13 @@ status_msg <- stringr::str_replace_all(
   "\\_"
 )
 
-# Link to R4DS in the LinkedIn format.
-status_msg <- stringr::str_replace(
-  status_msg,
-  "@R4DSCommunity",
-  "@[R4DS Online Learning Community](urn:li:organization:65437630)"
-)
-
 # We have more room, so include more info.
 status_msg <- status_msg |> 
   paste(
     "\nNew to #TidyTuesday?",
-    "Welcome to the weekly social data project in R. All are welcome!",
-    "⬡ The event is organized by the R4DS Online Learning Community.",
-    "⬡ For the latest datasets, follow R4DS on Mastodon or LinkedIn",
+    "Welcome to the weekly social data project. All are welcome!",
+    "⬡ The event is organized by the Data Science Learning Community (https://dslc.io).",
+    "⬡ For the latest datasets, follow DSLC on Mastodon or LinkedIn",
     sep = "\n"
   )
 
@@ -69,7 +62,7 @@ li_post <- li_base |>
       ),
       content = list(
         media = list(
-          id = "urn:li:image:C5622AQET2DqAfePIaw",
+          id = "urn:li:image:D5622AQEHKFmWxhSlJQ",
           altText = alt_text
         )
       ),
