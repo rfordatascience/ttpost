@@ -70,7 +70,7 @@ get_r4ds_toots <- function() {
 
 set_toot_content <- function(tt_toot_jon) {
   toot_content <- glue::glue(
-    "It's #TidyTuesday y'all! Show us what you made on our Slack at https://r4ds.io/join (find the #chat-tidytuesday channel)!",
+    "It's #TidyTuesday y'all! Show us what you made on our Slack at https://dslc.io/join (find the #chat-tidytuesday channel)!",
     "RT @jonthegeek {tt_toot_jon$url}",
     "{tt_toot_jon$content}",
     .sep = "\n\n"
@@ -78,7 +78,7 @@ set_toot_content <- function(tt_toot_jon) {
   
   if (nchar(toot_content) > 500) {
     toot_content <- glue::glue(
-      "It's #TidyTuesday y'all! Show us what you made on our Slack at https://r4ds.io/join (find the #chat-tidytuesday channel)!",
+      "It's #TidyTuesday y'all! Show us what you made on our Slack at https://dslc.io/join (find the #chat-tidytuesday channel)!",
       "RT @jonthegeek {tt_toot_jon$url}",
       "#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
       .sep = "\n\n"
