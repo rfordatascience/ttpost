@@ -38,6 +38,12 @@ li_client <- httr2::oauth_client(
   auth = "header"
 )
 
+# To refresh the refresh, visit 
+# https://www.linkedin.com/developers/tools/oauth/token-generator
+# 
+# TODO: Make this work with code.
+# https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-2-request-an-authorization-code
+
 li_base <- httr2::request("https://api.linkedin.com/rest") |> 
   httr2::req_oauth_refresh(
     client = li_client,

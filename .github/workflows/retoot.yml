@@ -13,7 +13,7 @@ jobs:
       RTOOT_R4DS_TOKEN: ${{ secrets.RTOOT_R4DS_TOKEN }}
       GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'renv'
