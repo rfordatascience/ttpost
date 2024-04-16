@@ -45,16 +45,25 @@ jobs:
             echo "ARTIFACT_ID=$($_.id)" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
         shell: pwsh
-      - name: Download artifact using API
+      - name: Download and inspect artifact using API
         shell: pwsh
         run: |
           $headers = @{
             "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
           }
           $artifactUrl = "https://api.github.com/repos/rfordatascience/ttpost/actions/artifacts/1418581898/zip"
-          Invoke-RestMethod -Uri $artifactUrl -Method Get -Headers $headers -OutFile "artifact.zip"
-          Write-Host "Artifact downloaded successfully. Listing contents:"
-          Get-ChildItem -Path .
-      - name: List directory contents
-        shell: pwsh
-        run: ls
+          $zipPath = "artifact.zip"
+          Invoke-RestMethod -Uri $artifactUrl -Method Get -Headers $headers -OutFile $zipPath
+          Write-Host "Artifact downloaded successfully."
+      
+          # Create a directory to extract the contents
+          $extractPath = "extracted_artifact"
+          New-Item -ItemType Directory -Force -Path $extractPath
+      
+          # Extract the artifact
+          Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
+          Write-Host "Artifact extracted. Listing contents:"
+          
+          # List the contents of the extracted directory
+          Get-ChildItem -Path $extractPath -Recurse
+          
