@@ -29,7 +29,7 @@ jobs:
           }
           $uri = "https://api.github.com/repos/rfordatascience/ttpost/actions/workflows/linkedin.yml/runs?status=success&branch=main&per_page=1"
           $response = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
-          $run_id = $response.workflow_runs[0].id
+          $run_id = $response.workflow_runs[0].id.ToString().Trim()
           echo "Latest run ID: $run_id"
           echo "RUN_ID=$run_id" | Out-File -FilePath $env:GITHUB_ENV -Append
       - name: List artifacts for a workflow run
