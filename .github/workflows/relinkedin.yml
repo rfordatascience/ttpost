@@ -1,5 +1,9 @@
 name: relinkedin
 
+permissions:
+  actions: read
+  contents: read
+
 on:
   schedule:
     - cron: '30 12 * * 2'
@@ -33,12 +37,12 @@ jobs:
           $response = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
           $run_id = $response.workflow_runs[0].id
           echo "Latest run ID: $run_id"
-          echo "::set-output name=run_id::$run_id"
+          echo "RUN_ID=$run_id" | Out-File -FilePath $env:GITHUB_ENV -Append
       - name: Load post ID.
         uses: actions/download-artifact@v4
         with:
           name: li_post_id
-          run-id: ${{ steps.fetch_run_id.outputs.run_id }}
+          run-id: ${{ env.RUN_ID }}
           path: li_post_id.rds
       - name: Repost on LinkedIn.
         run: Rscript dslc-relink.R
