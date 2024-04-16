@@ -47,8 +47,18 @@ jobs:
           }
         shell: pwsh
       - name: Load post ID.
-        uses: actions/download-artifact@v4
-        with:
-          run-id: ${{ env.RUN_ID }}
-          name: li_post_id.rds
-          path: li_post_id.rds
+        shell: pwsh
+        run: |
+          $headers = @{
+            "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
+            "Accept" = "application/vnd.github.v3+json"
+          }
+          $artifactId = $env:ARTIFACT_ID
+          $artifactUrl = "https://api.github.com/repos/rfordatascience/ttpost/actions/artifacts/$artifactId/zip"
+          
+          Write-Host "Downloading artifact ID: $artifactId from URL: $artifactUrl"
+          
+          Invoke-RestMethod -Uri $artifactUrl -Method Get -Headers $headers -OutFile "li_post_id.zip"
+          Write-Host "Artifact downloaded successfully to 'li_post_id.zip'. Listing contents:"
+          
+          Expand-Archive -LiteralPath "li_post_id.zip" -DestinationPath "." -Force
