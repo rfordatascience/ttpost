@@ -24,12 +24,16 @@ jobs:
           cache-version: 2
       - name: Fetch the latest successful run ID from linkedin workflow
         id: fetch_run_id
+        shell: pwsh
         run: |
-          RUN_ID=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/actions/workflows/linkedin.yml/runs?status=success&branch=main&per_page=1" \
-            | jq -r '.workflow_runs[0].id')
-          echo "Latest run ID: $RUN_ID"
-          echo "::set-output name=run_id::$RUN_ID"
+          $headers = @{
+            "Authorization" = "token ${{ secrets.GITHUB_TOKEN }}"
+          }
+          $uri = "https://api.github.com/repos/rfordatascience/ttpost/actions/workflows/linkedin.yml/runs?status=success&branch=main&per_page=1"
+          $response = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
+          $run_id = $response.workflow_runs[0].id
+          echo "Latest run ID: $run_id"
+          echo "::set-output name=run_id::$run_id"
       - name: Load post ID.
         uses: actions/download-artifact@v4
         with:
