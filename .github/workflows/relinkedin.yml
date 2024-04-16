@@ -45,10 +45,14 @@ jobs:
             Write-Output "Artifact Name: $($_.name), Artifact ID: $($_.id)"
           }
         shell: pwsh
+      - name: Make a directory for the artifact(s)
+        shell: pwsh
+        run: mkdir artifacts
       - name: Load post ID.
         uses: actions/download-artifact@v4
         with:
           run-id: ${{ env.RUN_ID }}
+          path: artifacts
       - name: List directory contents
         shell: pwsh
-        run: ls
+        run: ls -R artifacts
