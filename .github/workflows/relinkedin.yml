@@ -17,6 +17,7 @@ jobs:
       LI_CLIENT_ID: ${{ secrets.LI_CLIENT_ID}}
       LI_CLIENT_SECRET: ${{ secrets.LI_CLIENT_SECRET}}
       LI_REFRESH_TOKEN: ${{ secrets.LI_REFRESH_TOKEN}}
+      GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v4
       - name: Fetch the latest successful run ID from linkedin workflow
@@ -45,25 +46,9 @@ jobs:
             echo "ARTIFACT_ID=$($_.id)" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
         shell: pwsh
-      - name: Download and inspect artifact using API
-        shell: pwsh
-        run: |
-          $headers = @{
-            "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
-          }
-          $artifactUrl = "https://api.github.com/repos/rfordatascience/ttpost/actions/artifacts/1418581898/zip"
-          $zipPath = "artifact.zip"
-          Invoke-RestMethod -Uri $artifactUrl -Method Get -Headers $headers -OutFile $zipPath
-          Write-Host "Artifact downloaded successfully."
-      
-          # Create a directory to extract the contents
-          $extractPath = "extracted_artifact"
-          New-Item -ItemType Directory -Force -Path $extractPath
-      
-          # Extract the artifact
-          Expand-Archive -LiteralPath $zipPath -DestinationPath $extractPath -Force
-          Write-Host "Artifact extracted. Listing contents:"
-          
-          # List the contents of the extracted directory
-          Get-ChildItem -Path $extractPath -Recurse
-          
+      - name: Load post ID.
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ env.RUN_ID }}
+          name: li_post_id.rds
+          path: li_post_id.rds
