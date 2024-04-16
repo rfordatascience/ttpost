@@ -9,7 +9,7 @@ if (attr(li_post_id, "week") != lubridate::week(lubridate::now())) {
 
 attr(li_post_id, "week") <- NULL
 
-repost_msg <- "It's #TidyTuesday y'all! Show us what you made on our Slack at https://dslc.io/join (find the chat-tidytuesday channel)!\n\n#RStats #PyData #JuliaLang #DataViz #DataScience #DataAnalytics #data #tidyverse #R4DS"
+repost_msg <- "It's #TidyTuesday y'all! Show us what you made on our Slack at https://dslc.io/ -- find the chat-tidytuesday channel!\n\n#RStats #PyData #JuliaLang #DataViz #DataScience #DataAnalytics #data #tidyverse #R4DS"
 author_dslc <- "urn:li:organization:65437630"
 
 reshare_req <- li_base |> 
