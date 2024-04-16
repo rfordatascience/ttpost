@@ -17,7 +17,6 @@ jobs:
       LI_CLIENT_ID: ${{ secrets.LI_CLIENT_ID}}
       LI_CLIENT_SECRET: ${{ secrets.LI_CLIENT_SECRET}}
       LI_REFRESH_TOKEN: ${{ secrets.LI_REFRESH_TOKEN}}
-      GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v4
       - name: Fetch the latest successful run ID from linkedin workflow
@@ -46,7 +45,7 @@ jobs:
             echo "ARTIFACT_ID=$($_.id)" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
         shell: pwsh
-      - Download artifact using API
+      - name: Download artifact using API
         shell: pwsh
         run: |
           $headers = @{
