@@ -1,8 +1,8 @@
-name: linkedin
+name: relinkedin
 
 on:
   schedule:
-    - cron: '12 13 * * 1'
+    - cron: '30 12 * * 2'
   workflow_dispatch:
 
 
@@ -22,10 +22,10 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         with:
           cache-version: 2
-      - name: Post to LinkedIn.
-        run: Rscript runner-li.R
-      - name: Save post ID.
-        uses: actions/upload-artifact@v4
+      - name: Load post ID.
+        uses: actions/download-artifact@v4
         with:
           name: li_post_id
           path: li_post_id.rds
+      - name: Repost on LinkedIn.
+        run: Rscript dslc-relink.R

@@ -42,8 +42,8 @@ like_jon_toot <- function(id) {
   return(invisible(TRUE))
 }
 
-get_r4ds_toots <- function() {
-  r4ds_toots <- rtoot::get_account_statuses(
+get_dslc_toots <- function() {
+  dslc_toots <- rtoot::get_account_statuses(
     id = "109243727882736782",
     hashtag = "#TidyTuesday",
     exclude_reblogs = TRUE,
@@ -62,7 +62,7 @@ get_r4ds_toots <- function() {
     dplyr::arrange(pinned)
   return(
     rlang::set_names(
-      r4ds_toots$id,
+      dslc_toots$id,
       c("unpinned", "pinned")
     )
   )
