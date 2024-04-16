@@ -21,7 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Fetch the latest successful run ID from linkedin workflow
-        id: fetch_run_id
         shell: pwsh
         run: |
           $headers = @{
@@ -32,7 +31,8 @@ jobs:
           $run_id = $response.workflow_runs[0].id.ToString().Trim()
           echo "Latest run ID: $run_id"
           echo "RUN_ID=$run_id" | Out-File -FilePath $env:GITHUB_ENV -Append
-      - name: List artifacts for a workflow run
+      - name: Grab the artifact ID from that run
+        shell: pwsh
         run: |
           $headers = @{
             "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
@@ -45,8 +45,7 @@ jobs:
             Write-Output "Artifact Name: $($_.name), Artifact ID: $($_.id)"
             echo "ARTIFACT_ID=$($_.id)" | Out-File -FilePath $env:GITHUB_ENV -Append
           }
-        shell: pwsh
-      - name: Load post ID.
+      - name: Download post ID artifact
         shell: pwsh
         run: |
           $headers = @{

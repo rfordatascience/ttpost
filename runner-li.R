@@ -22,7 +22,7 @@ status_msg <- status_msg |>
   paste(
     "\nNew to #TidyTuesday?",
     "Welcome to the weekly social data project. All are welcome!",
-    "⬡ The event is organized by the Data Science Learning Community (https://dslc.io).",
+    "⬡ The event is organized by the Data Science Learning Community https://dslc.io",
     "⬡ For the latest datasets, follow DSLC on Mastodon or LinkedIn",
     sep = "\n"
   )
