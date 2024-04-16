@@ -1,11 +1,7 @@
 # Do the common tasks.
 source("runner-shared.R", local = TRUE)
+source("helpers-linkedin.R", local = TRUE)
 
-# LinkedIn.
-
-# Explicitly library httpuv so renv acknowledges that it's needed.
-library(httpuv)
- 
 # At least for now, we use the same image for every TT post on LinkedIn.
 alt_text <- paste(
   "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying",
@@ -31,29 +27,6 @@ status_msg <- status_msg |>
     sep = "\n"
   )
 
-li_client <- httr2::oauth_client(
-  id = Sys.getenv("LI_CLIENT_ID"),
-  token_url = "https://www.linkedin.com/oauth/v2/accessToken",
-  secret = Sys.getenv("LI_CLIENT_SECRET"),
-  auth = "header"
-)
-
-# To refresh the refresh, visit 
-# https://www.linkedin.com/developers/tools/oauth/token-generator
-# 
-# TODO: Make this work with code.
-# https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-2-request-an-authorization-code
-
-li_base <- httr2::request("https://api.linkedin.com/rest") |> 
-  httr2::req_oauth_refresh(
-    client = li_client,
-    refresh_token = Sys.getenv("LI_REFRESH_TOKEN"),
-    scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_organization_social,w_member_social,w_organization_social"
-  ) |>
-  httr2::req_headers(
-    `Linkedin-Version` = "202306"
-  )
-
 li_post <- li_base |> 
   httr2::req_url_path_append("posts") |> 
   httr2::req_body_json(
@@ -77,18 +50,13 @@ li_post <- li_base |>
     )
   )
 
-posted <- li_post |>
-  # Sometimes it fails the first time or three. Still trying to figure out
-  # *why*, but this seems to fix it.
-  httr2::req_retry(
-    # It fails for lack of auth. I think their server is catching up with the
-    # refresh usage, maybe?
-    is_transient = \(x) httr2::resp_status(x) == 401,
-    max_tries = 10,
-    backoff = ~ 3
-  ) |> 
-  httr2::req_perform()
+posted <- li_perform(li_post)
 
 if (httr2::resp_status(posted) != 201) {
   stop("LinkedIn broke!")
 }
+
+post_id <- httr2::resp_header(posted, "x-linkedin-id")
+attr(post_id, "week") <- lubridate::week(lubridate::now())
+saveRDS(post_id, "li_post_id.rds")
+

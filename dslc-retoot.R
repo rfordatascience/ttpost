@@ -1,4 +1,4 @@
-source("r4ds-helpers-mastodon.R", local = TRUE)
+source("dslc-helpers-mastodon.R", local = TRUE)
 
 tt_toot_jon <- get_jon_toot()
 
@@ -8,7 +8,7 @@ toot_content <- set_toot_content(tt_toot_jon)
 
 rtoot::post_toot(status = toot_content)
 
-r4ds_toots <- get_r4ds_toots()
+dslc_toots <- get_dslc_toots()
 
-pin_status(r4ds_toots[["pinned"]], unpin = TRUE)
-pin_status(r4ds_toots[["unpinned"]])
+pin_status(dslc_toots[["pinned"]], unpin = TRUE)
+pin_status(dslc_toots[["unpinned"]])
