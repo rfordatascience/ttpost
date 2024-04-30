@@ -1,6 +1,6 @@
 tt_slack <- function(status_msg, status_msg_end, img_paths, alt_text) {
   # We don't need the hashtags for Slack.
-  r4ds_msg <- stringr::str_replace(
+  dslc_msg <- stringr::str_replace(
     status_msg,
     "https://DSLC.io welcomes you",
     "<!here> Welcome"
@@ -9,7 +9,7 @@ tt_slack <- function(status_msg, status_msg_end, img_paths, alt_text) {
   
   posted <- slackcalls::post_slack(
     slack_method = "chat.postMessage",
-    text = r4ds_msg,
+    text = dslc_msg,
     channel = "C0106FDAE74" # chat-tidytuesday
   )
   

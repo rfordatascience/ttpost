@@ -1,4 +1,4 @@
-Sys.setenv(RTOOT_DEFAULT_TOKEN = Sys.getenv("RTOOT_R4DS_TOKEN"))
+Sys.setenv(RTOOT_DEFAULT_TOKEN = Sys.getenv("RTOOT_DSLC_TOKEN"))
 
 get_jon_toot <- function() {
   jon_toot <- rtoot::get_account_statuses(
@@ -88,7 +88,7 @@ set_toot_content <- function(tt_toot_jon) {
   return(toot_content)
 }
 
-rtoot_token_from_envvar <- function(envvar = "RTOOT_R4DS_TOKEN") {
+rtoot_token_from_envvar <- function(envvar = "RTOOT_DSLC_TOKEN") {
   rlang::set_names(
     as.list(strsplit(x = Sys.getenv(envvar), split = ";")[[1]]),
     c("bearer", "type", "instance")
