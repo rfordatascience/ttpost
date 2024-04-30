@@ -42,9 +42,15 @@ like_jon_toot <- function(id) {
   return(invisible(TRUE))
 }
 
+# To get a user's ID, te easiest thing seems to be to
+# rtoot::search_accounts("username"), and filter for the specific user.
+#
+# rtoot::search_accounts("DSLC") |> dplyr::filter(acct == "DSLC") |>
+#   dplyr::pull(id)
+
 get_dslc_toots <- function() {
   dslc_toots <- rtoot::get_account_statuses(
-    id = "109243727882736782",
+    id = "112269446568103237",
     hashtag = "#TidyTuesday",
     exclude_reblogs = TRUE,
     # Get a bunch in case I go on a promotion spree.
