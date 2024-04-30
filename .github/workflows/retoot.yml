@@ -10,7 +10,7 @@ jobs:
   post:
     runs-on: windows-latest
     env:
-      RTOOT_R4DS_TOKEN: ${{ secrets.RTOOT_R4DS_TOKEN }}
+      RTOOT_DSLC_TOKEN: ${{ secrets.RTOOT_DSLC_TOKEN }}
       GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
       - uses: actions/checkout@v4
@@ -21,4 +21,4 @@ jobs:
         with:
           cache-version: 2
       - name: Toot.
-        run: Rscript r4ds-retoot.R
+        run: Rscript dslc-retoot.R
