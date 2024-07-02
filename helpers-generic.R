@@ -29,13 +29,22 @@ next_year <- function() {
 }
 
 read_post_vars <- function() {
-  post_vars_url <- next_file("post_vars.json")
-  resp <- httr::GET(post_vars_url)
-  if (httr::status_code(resp) == 200) {
-    return(httr::content(resp, type = "application/json"))
-  } else {
-    return(NULL)
-  }
+  post_vars <- read_yaml_or_null(next_file("post_vars.yaml")) %||%
+    read_yaml_or_null(next_file("post_vars.yml")) %||%
+    read_yaml_or_null(next_file("post_vars.json"))
+  return(post_vars)
+}
+
+read_yaml_or_null <- function(url) {
+  tryCatch(
+    yaml::read_yaml(url),
+    error = function(e) {
+      return(NULL)
+    },
+    warning = function(e) {
+      return(NULL)
+    }
+  )
 }
 
 next_dir <- function() {
