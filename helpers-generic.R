@@ -29,7 +29,9 @@ next_year <- function() {
 }
 
 read_post_vars <- function() {
-  post_vars <- read_yaml_or_null(next_file("post_vars.yaml")) %||%
+  post_vars <- read_yaml_or_null(next_file("meta.yaml")) %||%
+    read_yaml_or_null(next_file("meta.yml")) %||%
+    read_yaml_or_null(next_file("post_vars.yaml")) %||%
     read_yaml_or_null(next_file("post_vars.yml")) %||%
     read_yaml_or_null(next_file("post_vars.json"))
   return(post_vars)
