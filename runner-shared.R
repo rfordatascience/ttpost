@@ -30,22 +30,26 @@ if (week_num == 1) {
   }
   
   # Sort out the rest of the info that goes into social media posts.
-  data_title <- available_datasets$Data[available_datasets$Week == week_num]
+  metadata <- read_post_vars()
+  data_title <- metadata$title
   week_date <- next_tuesday()
   
   # Download the images to the action runner.
-  download.file(next_file("pic1.png"), "pic1.png", mode = "wb")
-  download.file(next_file("pic2.png"), "pic2.png", mode = "wb")
+  img_files <- metadata$images |> purrr::map_chr("file")
+  img_alts <- metadata$images |> purrr::map_chr("alt")
+  purrr::walk(
+    img_files,
+    \(image) {
+      download.file(next_file(image), image, mode = "wb")
+    }
+  )
   
   img_paths <- c(
     "tt_logo.png",
     "tt_rules.png",
-    "pic1.png",
-    "pic2.png"
+    img_files
   )
   
-  # Try to get variables for the post.
-  post_vars <- read_post_vars()
   alt_text <- c(
     paste(
       "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying a",
@@ -78,18 +82,17 @@ if (week_num == 1) {
     sep = "\n"
   )
   
-  if (length(post_vars)) {
+  if (length(metadata)) {
     long_msg <- glue::glue(
       status_msg, 
-      "\n{emoji::emoji('news')} {post_vars$article_link}"
+      "\n{emoji::emoji('news')} {metadata$article$url}"
     )
     if (nchar(long_msg) + nchar(status_msg_end) <= 500) {
       status_msg <- long_msg
     }
     alt_text <- c(
       alt_text,
-      post_vars$pic1_alt,
-      post_vars$pic2_alt
+      img_alts
     )
   }
   
