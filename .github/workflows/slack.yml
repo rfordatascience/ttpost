@@ -19,6 +19,6 @@ jobs:
           r-version: 'renv'
       - uses: r-lib/actions/setup-renv@v2
         with:
-          cache-version: 2
+          cache-version: 1
       - name: Post on Slack.
         run: Rscript runner-slack.R
