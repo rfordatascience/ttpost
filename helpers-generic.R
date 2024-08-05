@@ -34,7 +34,10 @@ read_post_vars <- function() {
     read_yaml_or_null(next_file("post_vars.yaml")) %||%
     read_yaml_or_null(next_file("post_vars.yml")) %||%
     read_yaml_or_null(next_file("post_vars.json"))
-  return(post_vars)
+  if (length(post_vars)) {
+    return(post_vars)
+  }
+  cli::cli_abort("Failed to load post_vars.")
 }
 
 read_yaml_or_null <- function(url) {
