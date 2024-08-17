@@ -78,7 +78,8 @@ if (week_num == 1) {
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
   status_msg_end <- paste(
-    "\n\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
+    "\n\nWant to help? https://github.com/rfordatascience/tidytuesday/blob/master/.github/CONTRIBUTING.md",
+    "\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
     sep = "\n"
   )
   
