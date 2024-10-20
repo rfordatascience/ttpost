@@ -5,6 +5,8 @@ source("helpers-generic.R")
 week_num <- next_week_num()
 week_year <- next_year()
 
+call_to_action <- "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/master/.github/CONTRIBUTING.md"
+
 # Week 1 is "bring your own data", let's deal with that specifically.
 if (week_num == 1) {
   status_msg <- glue::glue(
@@ -13,6 +15,7 @@ if (week_num == 1) {
     "{emoji::emoji('rewind')} A previous #TidyTuesday dataset (https://tidytues.day/{week_year - 1})",
     "{emoji::emoji('index pointing at the viewer')} Personal metadata (TV shows watched, music listened, #RStats written, etc)",
     "{emoji::emoji('question')} Whatever else you want to use!",
+    paste0("\n", call_to_action),
     "\n#r4ds #tidyverse #DataViz",
     .sep = "\n"
   )
@@ -78,7 +81,8 @@ if (week_num == 1) {
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
   status_msg_end <- paste(
-    "\n\nWant to help? https://github.com/rfordatascience/tidytuesday/blob/master/.github/CONTRIBUTING.md",
+    "\n",
+    call_to_action,
     "\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
     sep = "\n"
   )
