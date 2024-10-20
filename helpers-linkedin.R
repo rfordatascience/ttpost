@@ -14,6 +14,15 @@ li_client <- httr2::oauth_client(
 # TODO: Make this work with code.
 # https://learn.microsoft.com/en-us/linkedin/shared/authentication/authorization-code-flow?tabs=HTTPS1#step-2-request-an-authorization-code
 
+# Automatically set the LinkedIn API version to 2 months ago since they
+# constantly change that without changing core features.
+li_version_date <- lubridate::rollback(lubridate::rollback(lubridate::today()))
+
+li_version <- paste0(
+  lubridate::year(li_version_date), 
+  stringr::str_pad(lubridate::month(li_version_date), 2, pad = "0")
+)
+
 li_base <- httr2::request("https://api.linkedin.com/rest") |> 
   httr2::req_oauth_refresh(
     client = li_client,
@@ -21,7 +30,7 @@ li_base <- httr2::request("https://api.linkedin.com/rest") |>
     scope = "r_basicprofile,r_emailaddress,r_liteprofile,r_member_social,r_organization_social,w_member_social,w_organization_social"
   ) |>
   httr2::req_headers(
-    `Linkedin-Version` = "202403"
+    `Linkedin-Version` = li_version
   )
 
 li_perform <- function(post_req) {
