@@ -8,7 +8,11 @@ alt_text <- paste(
   "a black paint splash"    
 )
 
-author <- "urn:li:person:mBbHaQfQtg"
+author_req <- li_base |> 
+  httr2::req_url("https://api.linkedin.com/v2/me")
+author_id <- li_perform(author_req) |> httr2::resp_body_json() |> _$id
+
+author <- glue::glue("urn:li:person:{author_id}")
 
 # The new LinkedIn API uses markdown, so escape _ so it isn't confused.
 status_msg <- stringr::str_replace_all(
