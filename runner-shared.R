@@ -55,8 +55,9 @@ if (week_num == 1) {
   
   alt_text <- c(
     paste(
-      "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying a",
-      "black paint splash"    
+      "Logo for the #TidyTuesday Project. The words TidyTuesday, A weekly data",
+      "project from the Data Science Learning Community (dslc.io) overlaying a",
+      "black paint splash."    
     ),
     paste(
       "TidyTuesday is a weekly social data project. All are welcome to", 
