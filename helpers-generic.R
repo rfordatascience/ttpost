@@ -55,7 +55,7 @@ read_yaml_or_null <- function(url) {
 next_dir <- function() {
   return(
     file.path(
-      "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data",
+      "https://raw.githubusercontent.com/rfordatascience/tidytuesday/main/data",
       next_year(),
       next_tuesday()
     )
