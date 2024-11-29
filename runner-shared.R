@@ -5,7 +5,7 @@ source("helpers-generic.R")
 week_num <- next_week_num()
 week_year <- next_year()
 
-call_to_action <- "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/master/.github/CONTRIBUTING.md"
+call_to_action <- "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/main/.github/CONTRIBUTING.md"
 
 # Week 1 is "bring your own data", let's deal with that specifically.
 if (week_num == 1) {
