@@ -1,0 +1,29 @@
+name: bsky
+
+on:
+  schedule:
+    - cron: '12 13 * * 1'
+  workflow_dispatch:
+
+
+jobs:
+  post:
+    runs-on: windows-latest
+    env:
+      BSKY_APP_PASS: ${{ secrets.BSKY_APP_PASS}}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'renv'
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
+      - name: Post to Bluesky.
+        run: Rscript runner-bsky.R
+      - name: Save skeet result.
+        uses: actions/upload-artifact@v4
+        with:
+          name: bsky_result
+          path: bsky_result.rds

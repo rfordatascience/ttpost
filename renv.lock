@@ -68,6 +68,33 @@
       ],
       "Hash": "e84984bf5f12a18628d9a02322128dfd"
     },
+    "bskyr": {
+      "Package": "bskyr",
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "christopherkenny",
+      "RemoteRepo": "bskyr",
+      "RemoteRef": "main",
+      "RemoteSha": "bf8cfcb69a481271179881689197cd6e403f76b9",
+      "Requirements": [
+        "R",
+        "cli",
+        "dplyr",
+        "fs",
+        "httr2",
+        "lubridate",
+        "mime",
+        "purrr",
+        "rlang",
+        "stringi",
+        "stringr",
+        "tibble",
+        "tidyr"
+      ],
+      "Hash": "2c70021b4889b7557e66b3bad5694a8d"
+    },
     "cli": {
       "Package": "cli",
       "Version": "3.6.3",
