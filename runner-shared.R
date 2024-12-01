@@ -5,20 +5,22 @@ source("helpers-generic.R")
 week_num <- next_week_num()
 week_year <- next_year()
 
-call_to_action <- "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/main/.github/CONTRIBUTING.md"
+call_to_action <- paste0(
+  "\n", 
+  "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/main/.github/CONTRIBUTING.md"
+)
 
 # Week 1 is "bring your own data", let's deal with that specifically.
 if (week_num == 1) {
-  status_msg <- glue::glue(
+  status_msg_start <- glue::glue(
     "It's week 1 of {week_year}, which means it's Bring Your Own Data Week!\n",
     "Ideas:",
     "{emoji::emoji('rewind')} A previous #TidyTuesday dataset (https://tidytues.day/{week_year - 1})",
     "{emoji::emoji('index pointing at the viewer')} Personal metadata (TV shows watched, music listened, #RStats written, etc)",
     "{emoji::emoji('question')} Whatever else you want to use!",
-    paste0("\n", call_to_action),
-    "\n#r4ds #tidyverse #DataViz",
     .sep = "\n"
   )
+  status_msg_end <- "\n#r4ds #tidyverse #DataViz"
   img_paths <- NULL
   alt_text <- NULL
 } else {
@@ -76,31 +78,35 @@ if (week_num == 1) {
     )
   )
   
-  status_msg <- glue::glue(
+  status_msg_start <- glue::glue(
     "https://DSLC.io welcomes you to week {week_num} of #TidyTuesday!",
     " We're exploring {data_title}!\n\n", 
     "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
   )
-  status_msg_end <- paste(
-    "\n",
-    call_to_action,
-    "\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds",
-    sep = "\n"
-  )
+  status_msg_end <- "\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds"
   
+  status_msg_start_not_bsky <- status_msg_start
   if (length(metadata)) {
-    long_msg <- glue::glue(
-      status_msg, 
-      "\n{emoji::emoji('news')} {metadata$article$url}"
+    article_msg <- glue::glue(
+      "{emoji::emoji('news')} {metadata$article$url}"
     )
-    if (nchar(long_msg) + nchar(status_msg_end) <= 500) {
-      status_msg <- long_msg
+    long_msg <- glue::glue(
+      status_msg_start_not_bsky, 
+      article_msg
+    )
+    if (nchar(long_msg) + nchar(call_to_action) + nchar(status_msg_end) + 1 < 500) {
+      status_msg_start_not_bsky <- long_msg
     }
     alt_text <- c(
       alt_text,
       img_alts
     )
   }
-  
-  status_msg <- glue::glue(status_msg, status_msg_end)
 }
+
+status_msg <- glue::glue(
+  status_msg_start_not_bsky,
+  call_to_action,
+  status_msg_end,
+  .sep = "\n"
+)

@@ -1,0 +1,69 @@
+name: reskeet
+
+permissions:
+  actions: read
+  contents: read
+
+on:
+  schedule:
+    - cron: '30 12 * * 2'
+  workflow_dispatch:
+
+
+jobs:
+  post:
+    runs-on: windows-latest
+    env:
+      BSKY_DSLC: ${{ secrets.BSKY_DSLC}}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the latest successful run ID from bsky workflow
+        shell: pwsh
+        run: |
+          $headers = @{
+            "Authorization" = "token ${{ secrets.GITHUB_TOKEN }}"
+          }
+          $uri = "https://api.github.com/repos/rfordatascience/ttpost/actions/workflows/bsky.yml/runs?status=success&branch=main&per_page=1"
+          $response = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
+          $run_id = $response.workflow_runs[0].id.ToString().Trim()
+          echo "Latest run ID: $run_id"
+          echo "RUN_ID=$run_id" | Out-File -FilePath $env:GITHUB_ENV -Append
+      - name: Grab the artifact ID from that run
+        shell: pwsh
+        run: |
+          $headers = @{
+            "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
+            "Accept" = "application/vnd.github.v3+json"
+          }
+          $uri = "https://api.github.com/repos/rfordatascience/ttpost/actions/runs/${{ env.RUN_ID }}/artifacts"
+          $response = Invoke-RestMethod -Uri $uri -Method Get -Headers $headers
+          Write-Output "Artifacts available:"
+          $response.artifacts | ForEach-Object {
+            Write-Output "Artifact Name: $($_.name), Artifact ID: $($_.id)"
+            echo "ARTIFACT_ID=$($_.id)" | Out-File -FilePath $env:GITHUB_ENV -Append
+          }
+      - name: Download post ID artifact
+        shell: pwsh
+        run: |
+          $headers = @{
+            "Authorization" = "Bearer ${{ secrets.GITHUB_TOKEN }}"
+            "Accept" = "application/vnd.github.v3+json"
+          }
+          $artifactId = $env:ARTIFACT_ID
+          $artifactUrl = "https://api.github.com/repos/rfordatascience/ttpost/actions/artifacts/$artifactId/zip"
+          
+          Write-Host "Downloading artifact ID: $artifactId from URL: $artifactUrl"
+          
+          Invoke-RestMethod -Uri $artifactUrl -Method Get -Headers $headers -OutFile "li_post_id.zip"
+          Write-Host "Artifact downloaded successfully to 'li_post_id.zip'."
+          
+          Expand-Archive -LiteralPath "li_post_id.zip" -DestinationPath "." -Force
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: 'renv'
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
+      - name: Repost on Bluesky.
+        run: Rscript dslc-reskeet.R
