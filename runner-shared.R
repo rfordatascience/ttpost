@@ -92,7 +92,8 @@ if (week_num == 1) {
     )
     long_msg <- glue::glue(
       status_msg_start_not_bsky, 
-      article_msg
+      article_msg,
+      .sep = "\n"
     )
     if (nchar(long_msg) + nchar(call_to_action) + nchar(status_msg_end) + 1 < 500) {
       status_msg_start_not_bsky <- long_msg
