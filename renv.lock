@@ -1,6 +1,6 @@
 {
   "R": {
-    "Version": "4.4.1",
+    "Version": "4.4.2",
     "Repositories": [
       {
         "Name": "P3M",
@@ -25,14 +25,14 @@
     },
     "Rcpp": {
       "Package": "Rcpp",
-      "Version": "1.0.13",
+      "Version": "1.0.13-1",
       "Source": "Repository",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": "P3M",
       "Requirements": [
         "methods",
         "utils"
       ],
-      "Hash": "f27411eb6d9c3dada5edd444b8416675"
+      "Hash": "6b868847b365672d6c1677b1608da9ed"
     },
     "askpass": {
       "Package": "askpass",
@@ -46,13 +46,13 @@
     },
     "bit": {
       "Package": "bit",
-      "Version": "4.5.0",
+      "Version": "4.5.0.1",
       "Source": "Repository",
       "Repository": "P3M",
       "Requirements": [
         "R"
       ],
-      "Hash": "5dc7b2677d65d0e874fc4aaf0e879987"
+      "Hash": "f89f074e0e49bf1dbe3eba0a15a91476"
     },
     "bit64": {
       "Package": "bit64",
@@ -74,10 +74,10 @@
       "Source": "GitHub",
       "RemoteType": "github",
       "RemoteHost": "api.github.com",
-      "RemoteUsername": "christopherkenny",
       "RemoteRepo": "bskyr",
-      "RemoteRef": "main",
-      "RemoteSha": "bf8cfcb69a481271179881689197cd6e403f76b9",
+      "RemoteUsername": "christopherkenny",
+      "RemotePkgRef": "christopherkenny/bskyr",
+      "RemoteSha": "23442ccb22383a7f94ae68333e50674f673bcdfe",
       "Requirements": [
         "R",
         "cli",
@@ -93,7 +93,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "2c70021b4889b7557e66b3bad5694a8d"
+      "Hash": "1e460166a5b428426c02d4ad5bd80488"
     },
     "cli": {
       "Package": "cli",
@@ -118,13 +118,13 @@
     },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.5.0",
+      "Version": "0.5.1",
       "Source": "Repository",
       "Repository": "P3M",
       "Requirements": [
         "R"
       ],
-      "Hash": "91570bba75d0c9d3f1040c835cee8fba"
+      "Hash": "9df43854f1c84685d095ed6270b52387"
     },
     "crayon": {
       "Package": "crayon",
@@ -154,13 +154,13 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "5.2.3",
+      "Version": "6.0.1",
       "Source": "Repository",
       "Repository": "P3M",
       "Requirements": [
         "R"
       ],
-      "Hash": "d91263322a58af798f6cf3b13fd56dde"
+      "Hash": "e8ba62486230951fcd2b881c5be23f96"
     },
     "desc": {
       "Package": "desc",
@@ -200,16 +200,16 @@
     },
     "emoji": {
       "Package": "emoji",
-      "Version": "15.0",
+      "Version": "16.0.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "glue",
         "stringr",
         "tibble"
       ],
-      "Hash": "961ccf8e88d1a8add09f9c811f4d7e29"
+      "Hash": "216140f0bbbe9c925ab348a67f2e58bd"
     },
     "fansi": {
       "Package": "fansi",
@@ -232,14 +232,14 @@
     },
     "fs": {
       "Package": "fs",
-      "Version": "1.6.4",
+      "Version": "1.6.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "methods"
       ],
-      "Hash": "15aeb8c27f5ea5161f9f6a641fafd93a"
+      "Hash": "7f48af39fa27711ea5fbd183b399920d"
     },
     "generics": {
       "Package": "generics",
@@ -254,9 +254,12 @@
     },
     "gert": {
       "Package": "gert",
-      "Version": "2.1.4",
+      "Version": "2.1.4.9000",
       "Source": "Repository",
-      "Repository": "P3M",
+      "Repository": "https://ropensci.r-universe.dev",
+      "RemoteUrl": "https://github.com/r-lib/gert",
+      "RemoteRef": "main",
+      "RemoteSha": "d8febbfacad1e8bb582e28f50c7e7092c0c63d21",
       "Requirements": [
         "askpass",
         "credentials",
@@ -265,7 +268,7 @@
         "sys",
         "zip"
       ],
-      "Hash": "ae855ad6d7be20dd7b05d43d25700398"
+      "Hash": "7c0d2f276aeeab2d93551847f23154e4"
     },
     "gh": {
       "Package": "gh",
@@ -352,7 +355,7 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "1.0.5",
+      "Version": "1.0.7",
       "Source": "Repository",
       "Repository": "P3M",
       "Requirements": [
@@ -369,7 +372,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "d84e4c33206aaace37714901ac2b00c3"
+      "Hash": "5a76da345ed4f3e6430517e08441edaf"
     },
     "ini": {
       "Package": "ini",
@@ -390,14 +393,14 @@
     },
     "later": {
       "Package": "later",
-      "Version": "1.3.2",
+      "Version": "1.4.1",
       "Source": "Repository",
-      "Repository": "RSPM",
+      "Repository": "P3M",
       "Requirements": [
         "Rcpp",
         "rlang"
       ],
-      "Hash": "a3e051d405326b8b0012377434c62b37"
+      "Hash": "501744395cac0bab0fbcfab9375ae92c"
     },
     "lifecycle": {
       "Package": "lifecycle",
@@ -508,9 +511,9 @@
     },
     "promises": {
       "Package": "promises",
-      "Version": "1.3.0",
+      "Version": "1.3.2",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "R6",
         "Rcpp",
@@ -520,7 +523,7 @@
         "rlang",
         "stats"
       ],
-      "Hash": "434cd5388a3979e74be5c219bcd6e77d"
+      "Hash": "c84fd4f75ea1f5434735e08b7f50fbca"
     },
     "purrr": {
       "Package": "purrr",
@@ -603,16 +606,16 @@
     },
     "rstudioapi": {
       "Package": "rstudioapi",
-      "Version": "0.17.0",
+      "Version": "0.17.1",
       "Source": "Repository",
       "Repository": "P3M",
-      "Hash": "fb9f5fce8f609e9b66f0bea5c783f88a"
+      "Hash": "5f90cd73946d706cfe26024294236113"
     },
     "rtoot": {
       "Package": "rtoot",
-      "Version": "0.3.4",
+      "Version": "0.3.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "clipr",
@@ -620,9 +623,10 @@
         "dplyr",
         "httr",
         "jsonlite",
+        "methods",
         "tibble"
       ],
-      "Hash": "41899db9270f1a2311d38399d2a176b0"
+      "Hash": "982b6368852bbf53404f9eab6b5733fc"
     },
     "rvest": {
       "Package": "rvest",
@@ -772,11 +776,11 @@
       "Version": "1.1.2.9000",
       "Source": "GitHub",
       "RemoteType": "github",
-      "RemoteHost": "api.github.com",
       "RemoteUsername": "dslc-io",
       "RemoteRepo": "tidytuesdayR",
       "RemoteRef": "main",
-      "RemoteSha": "a6ab3546466a99dfff5a11dbf2c5185942e5f58a",
+      "RemoteSha": "e5f114dcb7064d0b525f508494a6c68c427e5083",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R",
         "cli",
@@ -794,7 +798,7 @@
         "usethis",
         "xml2"
       ],
-      "Hash": "fefd13658196ca2274d77ce19cfa4d50"
+      "Hash": "1178a2fcb8e12dda1d2e15f3f0d712c4"
     },
     "timechange": {
       "Package": "timechange",
@@ -820,9 +824,9 @@
     },
     "usethis": {
       "Package": "usethis",
-      "Version": "3.0.0",
+      "Version": "3.1.0",
       "Source": "Repository",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "cli",
@@ -842,12 +846,13 @@
         "rprojroot",
         "rstudioapi",
         "stats",
+        "tools",
         "utils",
         "whisker",
         "withr",
         "yaml"
       ],
-      "Hash": "b2fbf93c2127bedd2cbe9b799530d5d2"
+      "Hash": "0d7f5ca181f9b1e68b217bd93b6cc703"
     },
     "utf8": {
       "Package": "utf8",
@@ -908,15 +913,15 @@
     },
     "withr": {
       "Package": "withr",
-      "Version": "3.0.1",
+      "Version": "3.0.2",
       "Source": "Repository",
-      "Repository": "https://cran.rstudio.com",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "grDevices",
         "graphics"
       ],
-      "Hash": "07909200e8bbe90426fbfeb73e1e27aa"
+      "Hash": "cc2d62c76458d425210d1eb1478b30b4"
     },
     "xml2": {
       "Package": "xml2",
