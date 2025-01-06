@@ -19,7 +19,7 @@ next_week_num <- function() {
   jan_1st <- paste0(year, "0101")
   jan_1st <- lubridate::ymd(jan_1st)
   week_num <- as.numeric((week_date - jan_1st))/7 + 1
-  return(round(week_num))
+  return(floor(week_num))
 }
 
 next_year <- function() {

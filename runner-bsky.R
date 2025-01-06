@@ -12,7 +12,7 @@ bsky_msg_start <- stringr::str_replace(
 
 bsky_msg <- paste(bsky_msg_start, status_msg_end, sep = "\n")
 
-if (nchar(article_msg) + nchar(bsky_msg) < 300) {
+if (length(article_msg) && nchar(article_msg) + nchar(bsky_msg) < 300) {
   bsky_msg_start <- paste(bsky_msg_start, article_msg, sep = "\n")
   bsky_msg <- paste(bsky_msg_start, status_msg_end, sep = "\n")
 }
