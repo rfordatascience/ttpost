@@ -10,6 +10,9 @@ call_to_action <- paste0(
   "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/main/.github/CONTRIBUTING.md"
 )
 
+metadata <- NULL
+article_msg <- NULL
+
 # Week 1 is "bring your own data", let's deal with that specifically.
 if (week_num == 1) {
   status_msg_start <- glue::glue(
@@ -20,6 +23,7 @@ if (week_num == 1) {
     "{emoji::emoji('question')} Whatever else you want to use!",
     .sep = "\n"
   )
+  status_msg_start_not_bsky <- status_msg_start
   status_msg_end <- "\n#r4ds #tidyverse #DataViz"
   img_paths <- NULL
   alt_text <- NULL

@@ -4,7 +4,7 @@ source("runner-shared.R", local = TRUE)
 # Toot.
 source("helpers-mastodon.R", local = TRUE)
 
-if (length(metadata$credit$mastodon)) {
+if (length(metadata) && length(metadata$credit$mastodon)) {
   credit <- glue::glue(
     "Curator: {metadata$credit$mastodon}"
   )
