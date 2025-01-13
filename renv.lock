@@ -77,7 +77,7 @@
       "RemoteRepo": "bskyr",
       "RemoteUsername": "christopherkenny",
       "RemotePkgRef": "christopherkenny/bskyr",
-      "RemoteSha": "23442ccb22383a7f94ae68333e50674f673bcdfe",
+      "RemoteSha": "fb6a1dfb62d0531884c1d55b4ce0a83dfc80fbb9",
       "Requirements": [
         "R",
         "cli",
@@ -93,7 +93,7 @@
         "tibble",
         "tidyr"
       ],
-      "Hash": "1e460166a5b428426c02d4ad5bd80488"
+      "Hash": "25ad04cc25f62bd0b7714db6d06ddd9a"
     },
     "cli": {
       "Package": "cli",
@@ -154,13 +154,17 @@
     },
     "curl": {
       "Package": "curl",
-      "Version": "6.0.1",
-      "Source": "Repository",
-      "Repository": "P3M",
+      "Version": "6.1.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteUsername": "jeroen",
+      "RemoteRepo": "curl",
+      "RemoteSha": "55639920cf97584c4ec983dcc2203f24effe5b8b",
+      "RemoteHost": "api.github.com",
       "Requirements": [
         "R"
       ],
-      "Hash": "e8ba62486230951fcd2b881c5be23f96"
+      "Hash": "ba12e9f714453b4c4fc4991b8dee3e90"
     },
     "desc": {
       "Package": "desc",
@@ -355,9 +359,14 @@
     },
     "httr2": {
       "Package": "httr2",
-      "Version": "1.0.7",
-      "Source": "Repository",
-      "Repository": "P3M",
+      "Version": "1.0.7.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "httr2",
+      "RemoteUsername": "r-lib",
+      "RemotePkgRef": "r-lib/httr2",
+      "RemoteSha": "e1a58a64863d510afed2bdf3c45fe42f84c256e1",
       "Requirements": [
         "R",
         "R6",
@@ -372,7 +381,7 @@
         "vctrs",
         "withr"
       ],
-      "Hash": "5a76da345ed4f3e6430517e08441edaf"
+      "Hash": "cd1e7637f2f10a72a32bb824e46c488f"
     },
     "ini": {
       "Package": "ini",
@@ -417,16 +426,16 @@
     },
     "lubridate": {
       "Package": "lubridate",
-      "Version": "1.9.3",
+      "Version": "1.9.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "R",
         "generics",
         "methods",
         "timechange"
       ],
-      "Hash": "680ad542fbcf801442c83a6ac5a2126c"
+      "Hash": "be38bc740fc51783a78edb5a157e4104"
     },
     "magrittr": {
       "Package": "magrittr",
@@ -450,22 +459,21 @@
     },
     "openssl": {
       "Package": "openssl",
-      "Version": "2.2.2",
+      "Version": "2.3.1",
       "Source": "Repository",
       "Repository": "P3M",
       "Requirements": [
         "askpass"
       ],
-      "Hash": "d413e0fef796c9401a4419485f709ca1"
+      "Hash": "37a7f0abce0349f5950ce49f38c7626b"
     },
     "pillar": {
       "Package": "pillar",
-      "Version": "1.9.0",
+      "Version": "1.10.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "P3M",
       "Requirements": [
         "cli",
-        "fansi",
         "glue",
         "lifecycle",
         "rlang",
@@ -473,7 +481,7 @@
         "utils",
         "vctrs"
       ],
-      "Hash": "15da5a8412f317beeee6175fbc76f4bb"
+      "Hash": "8b16b6097daef84cd3c40a6a7c5c9d86"
     },
     "pkgconfig": {
       "Package": "pkgconfig",
