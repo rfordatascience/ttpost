@@ -38,7 +38,7 @@ li_perform <- function(post_req) {
     httr2::req_retry(
       # It fails for lack of auth. I think their server is catching up with the
       # refresh usage, maybe?
-      is_transient = \(x) httr2::resp_status(x) == 401,
+      is_transient = \(x) httr2::resp_status(x) %in% c(401, 403, 425, 429),
       max_tries = 10,
       backoff = ~ 3
     ) |> 
