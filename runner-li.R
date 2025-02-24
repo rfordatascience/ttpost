@@ -21,6 +21,26 @@ status_msg <- stringr::str_replace_all(
   "\\_"
 )
 
+if (
+  length(metadata) && 
+  length(metadata$credit$linkedin) && 
+  !is.na(metadata$credit$linkedin) && 
+  metadata$credit$linkedin != ""
+) {
+  li_credit <- stringr::str_replace(
+    metadata$credit$linkedin,
+    "https://www.linkedin.com/in/",
+    "^@"
+  )
+  
+  credit <- glue::glue(
+    "Curator: {li_credit}"
+  )
+  if (length(credit)) {
+    status_msg <- paste(credit, status_msg, sep = "\n")
+  }
+}
+
 # We have more room, so include more info.
 status_msg <- status_msg |> 
   paste(
