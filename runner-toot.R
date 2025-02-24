@@ -8,7 +8,7 @@ if (length(metadata) && length(metadata$credit$mastodon)) {
   credit <- glue::glue(
     "Curator: {metadata$credit$mastodon}"
   )
-  if (length(credit) && (nchar(status_msg) + nchar(credit) < 500)) {
+  if (length(credit) && (nchar(status_msg, "bytes") + nchar(credit, "bytes") < 500)) {
     status_msg <- paste(credit, status_msg, sep = "\n")
   }
 }

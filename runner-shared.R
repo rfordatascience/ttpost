@@ -99,7 +99,7 @@ if (week_num == 1) {
       article_msg,
       .sep = "\n"
     )
-    if (nchar(long_msg) + nchar(call_to_action) + nchar(status_msg_end) + 1 < 500) {
+    if (nchar(long_msg, "bytes") + nchar(call_to_action, "bytes") + nchar(status_msg_end, "bytes") + 1 < 500) {
       status_msg_start_not_bsky <- long_msg
     }
     alt_text <- c(

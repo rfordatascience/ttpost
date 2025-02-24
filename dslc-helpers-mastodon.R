@@ -82,7 +82,7 @@ set_toot_content <- function(tt_toot_jon) {
     .sep = "\n\n"
   )
   
-  if (nchar(toot_content) > 500) {
+  if (nchar(toot_content, "bytes") > 500) {
     toot_content <- glue::glue(
       "It's #TidyTuesday y'all! Show us what you made on our Slack at https://dslc.io/join (find the #chat-tidytuesday channel)!",
       "RT @jonthegeek {tt_toot_jon$url}",
