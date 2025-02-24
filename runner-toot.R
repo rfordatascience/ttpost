@@ -13,4 +13,11 @@ if (length(metadata) && length(metadata$credit$mastodon)) {
   }
 }
 
+if (length(img_paths) > 4) {
+  img_paths <- setdiff(img_paths, img_paths[[2]])
+  alt_text <- setdiff(alt_text, alt_text[[2]])
+  img_paths <- img_paths[1:4]
+  alt_text <- alt_text[1:4]
+}
+
 tt_toot(status_msg, img_paths, alt_text)
