@@ -29,8 +29,8 @@ if (
 ) {
   li_credit <- stringr::str_replace(
     metadata$credit$linkedin,
-    "https://www.linkedin.com/in/",
-    "^@"
+    "^@",
+    "https://www.linkedin.com/in/"
   )
   
   credit <- glue::glue(
