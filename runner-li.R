@@ -27,14 +27,17 @@ if (
   !is.na(metadata$credit$linkedin) && 
   metadata$credit$linkedin != ""
 ) {
-  li_credit <- stringr::str_replace(
+  li_name <- stringr::str_remove(
     metadata$credit$linkedin,
-    "^@",
-    "https://www.linkedin.com/in/"
+    "^@"
+  )
+  li_credit <- paste0(
+    "https://www.linkedin.com/in/",
+    li_name
   )
   
   credit <- glue::glue(
-    "Curator: {li_credit}"
+    "Curator: {li_name} ({li_credit})"
   )
   if (length(credit)) {
     status_msg <- paste(credit, status_msg, sep = "\n")
