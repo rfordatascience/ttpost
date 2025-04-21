@@ -37,10 +37,10 @@ if (
   )
   
   credit <- glue::glue(
-    "Curator: {li_name} ({li_credit})"
+    "Curator: {li_name} {li_credit}"
   )
   if (length(credit)) {
-    status_msg <- paste(credit, status_msg, sep = "\n")
+    status_msg <- paste(credit, status_msg, sep = "\n\n")
   }
 }
 
