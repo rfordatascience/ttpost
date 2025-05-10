@@ -66,13 +66,13 @@ li_post <- li_base |>
         targetEntities = list(),
         thirdPartyDistributionChannels = list()
       ),
-     #content = list(
-     #  media = list(
-         # id = "urn:li:image:D5622AQEHKFmWxhSlJQ", # Owned by Jon
-     #    id = "urn:li:image:D562CAQEXGJZvRPNQEQ", # Owned by Lydia
-     #    altText = alt_text
-     #  )
-     #),
+      content = list(
+        media = list(
+          id = "urn:li:image:D5622AQEHKFmWxhSlJQ", # Owned by Jon
+          # id = "urn:li:image:D562CAQEXGJZvRPNQEQ", # Owned by Lydia
+          altText = alt_text
+        )
+      ),
       lifecycleState = "PUBLISHED",
       isReshareDisabledByAuthor = FALSE
     )
