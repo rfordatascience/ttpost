@@ -5,10 +5,10 @@ source("helpers-linkedin.R", local = TRUE)
 # At least for now, we use the same image for every TT post on LinkedIn.
 alt_text <- paste(
   "Logo for the #TidyTuesday Project. The words TidyTuesday overlaying",
-  "a black paint splash"    
+  "a black paint splash"
 )
 
-author_req <- li_base |> 
+author_req <- li_base |>
   httr2::req_url("https://api.linkedin.com/v2/me")
 author_id <- li_perform(author_req) |> httr2::resp_body_json() |> _$id
 
@@ -22,22 +22,21 @@ status_msg <- stringr::str_replace_all(
 )
 
 if (
-  length(metadata) && 
-  length(metadata$credit$linkedin) && 
-  !is.na(metadata$credit$linkedin) && 
-  metadata$credit$linkedin != ""
+  length(metadata) &&
+    length(metadata$credit$linkedin) &&
+    !is.na(metadata$credit$linkedin) &&
+    metadata$credit$linkedin != ""
 ) {
-  li_name <- stringr::str_remove(
-    metadata$credit$linkedin,
-    "^@"
-  )
+  li_name <- stringr::str_split_1(metadata$credit$linkedin, "@") |>
+    stringr::str_squish() |>
+    stringr::str_subset("\\S")
   li_credit <- paste0(
     "https://www.linkedin.com/in/",
     li_name
   )
-  
-  credit <- glue::glue(
-    "Curator: {li_name} {li_credit}"
+  credit <- paste(
+    "Curator:",
+    stringr::str_flatten_comma(glue::glue("{li_name} {li_credit}"))
   )
   if (length(credit)) {
     status_msg <- paste(credit, status_msg, sep = "\n\n")
@@ -45,7 +44,7 @@ if (
 }
 
 # We have more room, so include more info.
-status_msg <- status_msg |> 
+status_msg <- status_msg |>
   paste(
     "\nNew to #TidyTuesday?",
     "Welcome to the weekly social data project. All are welcome!",
@@ -54,8 +53,8 @@ status_msg <- status_msg |>
     sep = "\n"
   )
 
-li_post <- li_base |> 
-  httr2::req_url_path_append("posts") |> 
+li_post <- li_base |>
+  httr2::req_url_path_append("posts") |>
   httr2::req_body_json(
     list(
       author = author,
@@ -87,4 +86,3 @@ if (httr2::resp_status(posted) != 201) {
 post_id <- httr2::resp_header(posted, "x-linkedin-id")
 attr(post_id, "week") <- lubridate::week(lubridate::now())
 saveRDS(post_id, "li_post_id.rds")
-
