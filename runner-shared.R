@@ -6,7 +6,7 @@ week_num <- next_week_num()
 week_year <- next_year()
 
 call_to_action <- paste0(
-  "\n", 
+  "\n",
   "Submit a dataset! https://github.com/rfordatascience/tidytuesday/blob/main/.github/CONTRIBUTING.md"
 )
 
@@ -28,78 +28,100 @@ if (week_num == 1) {
   img_paths <- NULL
   alt_text <- NULL
 } else {
-  available_datasets <- tidytuesdayR::tt_datasets(week_year) |> 
-    unclass() |> 
+  available_datasets <- tidytuesdayR::tt_datasets(week_year) |>
+    unclass() |>
     tibble::as_tibble()
-  
+
   # This if/else is somewhat backward, because it's easier to stop early and get
   # rid of the if.
   if (!(week_num %in% available_datasets$Week)) {
     stop("No data available!")
   }
-  
+
   # Sort out the rest of the info that goes into social media posts.
   metadata <- read_post_vars()
   data_title <- metadata$title
   week_date <- next_tuesday()
-  
+
   # Download the images to the action runner.
   img_files <- metadata$images |> purrr::map_chr("file")
   img_alts <- metadata$images |> purrr::map_chr("alt")
+  max_bsky_size <- fs::fs_bytes("976.56KB")
   purrr::walk(
     img_files,
     \(image) {
       download.file(next_file(image), image, mode = "wb")
+      original_img_size <- fs::file_size(image)
+      if (original_img_size >= max_bsky_size) {
+        # Round down to make sure we're *under* 1MB. This isn't actually
+        # guaranteed to work because image size isn't directly proportional to
+        # file size, but it seems to err on the side of making things smaller
+        # than they need to be.
+        ratio <- floor(
+          as.integer(max_bsky_size) / as.integer(original_img_size) * 90
+        )
+        magick::image_read(image) |>
+          magick::image_resize(
+            magick::geometry_size_percent(ratio)
+          ) |>
+          magick::image_write(image)
+      }
     }
   )
-  
+
   img_paths <- c(
     "tt_logo.png",
     "tt_rules.png",
     img_files
   )
-  
+
   alt_text <- c(
     paste(
       "Logo for the #TidyTuesday Project. The words TidyTuesday, A weekly data",
       "project from the Data Science Learning Community (dslc.io) overlaying a",
-      "black paint splash."    
+      "black paint splash."
     ),
     paste(
-      "TidyTuesday is a weekly social data project. All are welcome to", 
-      "participate! Please remember to share the code used to generate your", 
-      "results!\nTidyTuesday is organized by the Data Science Learning", 
-      "Community. Join our Slack for free online help with R and other", 
-      "data-related topics, or to participate in a data-related book club!\n\n", 
-      "How to Participate\nData is posted to social media every Monday", 
-      "morning. Follow the instructions in the new post for how to download", 
-      "the data.\nExplore the data, watching out for interesting", 
-      "relationships. We would like to emphasize that you should not draw", 
-      "conclusions about causation in the data.\nCreate a visualization, a", 
-      "model, a shiny app, or some other piece of data-science-related output,", 
-      "using R or another programming language.\nShare your output and the", 
+      "TidyTuesday is a weekly social data project. All are welcome to",
+      "participate! Please remember to share the code used to generate your",
+      "results!\nTidyTuesday is organized by the Data Science Learning",
+      "Community. Join our Slack for free online help with R and other",
+      "data-related topics, or to participate in a data-related book club!\n\n",
+      "How to Participate\nData is posted to social media every Monday",
+      "morning. Follow the instructions in the new post for how to download",
+      "the data.\nExplore the data, watching out for interesting",
+      "relationships. We would like to emphasize that you should not draw",
+      "conclusions about causation in the data.\nCreate a visualization, a",
+      "model, a shiny app, or some other piece of data-science-related output,",
+      "using R or another programming language.\nShare your output and the",
       "code used to generate it on social media with the #TidyTuesday hashtag."
     )
   )
-  
+
   status_msg_start <- glue::glue(
     "https://DSLC.io welcomes you to week {week_num} of #TidyTuesday!",
-    " We're exploring {data_title}!\n\n", 
-    "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}" 
+    " We're exploring {data_title}!\n\n",
+    "{emoji::emoji('folder')} https://tidytues.day/{week_year}/{week_date}"
   )
   status_msg_end <- "\n#RStats #PyData #JuliaLang #DataViz #tidyverse #r4ds"
-  
+
   status_msg_start_not_bsky <- status_msg_start
   if (length(metadata)) {
     article_msg <- glue::glue(
       "{emoji::emoji('news')} {metadata$article$url}"
     )
     long_msg <- glue::glue(
-      status_msg_start_not_bsky, 
+      status_msg_start_not_bsky,
       article_msg,
       .sep = "\n"
     )
-    if (nchar(long_msg, "bytes") + nchar(call_to_action, "bytes") + nchar(status_msg_end, "bytes") + 1 < 500) {
+    if (
+      nchar(long_msg, "bytes") +
+        nchar(call_to_action, "bytes") +
+        nchar(status_msg_end, "bytes") +
+        1 <
+        500
+    ) {
       status_msg_start_not_bsky <- long_msg
     }
     alt_text <- c(
