@@ -45,13 +45,16 @@ if (week_num == 1) {
 
   # Download the images to the action runner.
   img_files <- metadata$images |> purrr::map_chr("file")
-  img_alts <- metadata$images |> purrr::map_chr("alt")
+  img_alts <- metadata$images |> purrr::map_chr("alt") |> stringr::str_trim()
   max_bsky_size <- fs::fs_bytes("976.56KB")
+  max_mastodon_megapix <- 8.3
   purrr::walk(
     img_files,
     \(image) {
       download.file(next_file(image), image, mode = "wb")
-      original_img_size <- fs::file_size(image)
+      img <- magick::image_read(image)
+      original_img_size <- magick::image_info(img)$filesize
+
       if (original_img_size >= max_bsky_size) {
         # Round down to make sure we're *under* 1MB. This isn't actually
         # guaranteed to work because image size isn't directly proportional to
@@ -60,12 +63,23 @@ if (week_num == 1) {
         ratio <- floor(
           as.integer(max_bsky_size) / as.integer(original_img_size) * 90
         )
-        magick::image_read(image) |>
-          magick::image_resize(
-            magick::geometry_size_percent(ratio)
-          ) |>
-          magick::image_write(image)
+        img <- magick::image_resize(
+          img,
+          magick::geometry_size_percent(ratio)
+        )
       }
+      img_info <- magick::image_info(img)
+      megapix <- img_info$width * img_info$height / 1e6
+      if (megapix >= max_mastodon_megapix) {
+        ratio <- floor(
+          max_mastodon_megapix / megapix * 90
+        )
+        img <- magick::image_resize(
+          img,
+          magick::geometry_size_percent(ratio)
+        )
+      }
+      magick::image_write(img, image)
     }
   )
 
