@@ -12,25 +12,19 @@ bsky_msg_start <- stringr::str_replace(
 
 bsky_msg <- paste(bsky_msg_start, status_msg_end, sep = "\n")
 
-if (length(article_msg) && nchar(article_msg, "bytes") + nchar(bsky_msg, "bytes") < 300) {
+if (
+  length(article_msg) && bsky_nchar(article_msg) + bsky_nchar(bsky_msg) < 300
+) {
   bsky_msg_start <- paste(bsky_msg_start, article_msg, sep = "\n")
   bsky_msg <- paste(bsky_msg_start, status_msg_end, sep = "\n")
 }
 
-if (length(metadata$credit$bluesky)) {
-  bsky_credit <- stringr::str_replace(
-    metadata$credit$bluesky,
-    "https://bsky.app/profile/",
-    "@"
-  )
-  credit <- glue::glue("Curator: {bsky_credit}")
-  maybe_msg <- paste(
-    credit, bsky_msg, sep = "\n"
-  )
-  if (length(credit) && (nchar(maybe_msg, "bytes") <= 300)) {
-    bsky_msg <- maybe_msg
-  }
-}
+bsky_credit <- stringr::str_replace(
+  metadata$credit$bluesky,
+  "https://bsky.app/profile/",
+  "@"
+)
+credit <- glue::glue("Curator: {bsky_credit}")
 
 bskyr::set_bluesky_user("jonthegeek.com")
 bskyr::set_bluesky_pass(Sys.getenv("BSKY_APP_PASS"))
@@ -47,3 +41,10 @@ result <- tt_skeet(bsky_msg, img_paths, alt_text)
 
 attr(result, "week") <- lubridate::week(lubridate::now())
 saveRDS(result, "bsky_result.rds")
+
+if (length(credit) && nchar(credit)) {
+  bskyr::bs_post(
+    credit,
+    reply = result$uri
+  )
+}
