@@ -21,7 +21,7 @@ jobs:
           r-version: 'renv'
       - uses: r-lib/actions/setup-renv@v2
         with:
-          cache-version: 2
+          cache-version: 1
       - name: Post to LinkedIn.
         run: Rscript runner-li.R
       - name: Save post ID.
