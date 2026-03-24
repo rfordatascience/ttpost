@@ -13,7 +13,7 @@ jobs:
       BSKY_APP_PASS: ${{ secrets.BSKY_APP_PASS}}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'renv'
@@ -23,7 +23,7 @@ jobs:
       - name: Post to Bluesky.
         run: Rscript runner-bsky.R
       - name: Save skeet result.
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: bsky_result
           path: bsky_result.rds

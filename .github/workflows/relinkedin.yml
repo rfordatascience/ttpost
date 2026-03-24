@@ -19,7 +19,7 @@ jobs:
       LI_REFRESH_TOKEN: ${{ secrets.LI_REFRESH_TOKEN}}
       GITHUB_PAT: ${{ secrets.GH_PAT }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Fetch the latest successful run ID from linkedin workflow
         shell: pwsh
         run: |
