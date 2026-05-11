@@ -2,7 +2,7 @@ name: linkedin
 
 on:
   schedule:
-    - cron: '12 13 * * 1'
+    - cron: '12 11 * * 1'
   workflow_dispatch:
 
 
