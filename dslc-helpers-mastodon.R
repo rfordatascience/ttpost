@@ -29,16 +29,17 @@ get_jon_toot <- function() {
 }
 
 like_jon_toot <- function(id) {
-  rtoot::post_status(
-    id,
-    "favourite",
-    verbose = FALSE
-  )
-  rtoot::post_status(
-    id,
-    "reblog",
-    verbose = FALSE
-  )
+  token <- rtoot_token_from_envvar()
+
+  for (action in c("favourite", "reblog")) {
+    path <- glue::glue("https://{token$instance}/api/v1/statuses/{id}/{action}")
+    httr2::request(path) |>
+      httr2::req_auth_bearer_token(token$bearer) |>
+      httr2::req_user_agent("ttpost (https://github.com/rfordatascience/ttpost)") |>
+      httr2::req_method("POST") |>
+      httr2::req_perform()
+  }
+
   return(invisible(TRUE))
 }
 
